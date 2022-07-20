@@ -10,8 +10,9 @@ function renderBoard(mat, selector) {
         for (var j = 0; j < mat[0].length; j++) {
 
             const cell = mat[i][j].content
+            const contentData = mat[i][j].content
             const className = 'cell cell-' + i + '-' + j
-            strHTML += `<td class="${className}" onclick="cellClicked(${i}, ${j})">${cell}</td>`
+            strHTML += `<td class="${className}" data-content="${contentData}" onclick="cellClicked(${i}, ${j})">${cell}</td>`
         }
         strHTML += '</tr>'
     }
@@ -24,7 +25,10 @@ function renderBoard(mat, selector) {
 function renderCell(location, value) { // location such as: {i: 2, j: 7}
     // Select the elCell and set the value
     const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
+    if (!isNaN(value)) elCell.removeAttribute('data-content')
+    else elCell.dataset.content = value
     elCell.innerHTML = value
+    
 }
 
 

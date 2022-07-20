@@ -30,6 +30,7 @@
     height: 50px;
     text-align: center;
     border: 2px solid white;
+    cursor: default;
 }
 
 .help-container,
@@ -54,4 +55,19 @@
 .stat-count * {
     display: inline-block;
     margin: 0 8px;
+}
+
+[data-content] {
+    background-color: black;
+}
+
+/* [data-content] {
+    background-color: black;
+} */
+
+[data-content="💣"] {
+    background-color: red;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }

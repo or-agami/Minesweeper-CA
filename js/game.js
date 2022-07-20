@@ -46,7 +46,7 @@ function createBoard(size) {
         board.push([])
         for (let j = 0; j < size; j++) {
             const location = { i, j }
-            board[i].push({ location, isClicked: false, isMine: false, content: EMPTY })
+            board[i].push({ location, isClicked: false, isMine: false, isFlagged: false, content: EMPTY })
         }
     }
     return board
