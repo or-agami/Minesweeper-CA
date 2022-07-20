@@ -51,3 +51,7 @@ function createBoard(size, mines) {
     }
     return gBoard
 }
+
+// function startGame() {
+    
+// }
