@@ -35,7 +35,7 @@
                         <td class="board-header" colspan="8">
                             <div class="help-container">
                                 <div class="lives-count">
-                                    <p>Lives left:</p>
+                                    <!-- <p>Lives left:</p> -->
                                     <p id="lives-count">💗💗💗</p>
                                 </div>
                                 <div class="stat-count" onclick="initGame()">
@@ -47,8 +47,16 @@
                                     <!-- <div class="timer">000</div> -->
                                 </div>
                                 <div class="spoil-count" onclick="spoilClick(this)">
-                                    <p>spoil:</p>
+                                    <!-- <p>spoil:</p> -->
                                     <p id="spoil-count">💡💡💡</p>
+                                </div>
+                            </div>
+                            <div class="cheats-container">
+                                <div class="safe-click-container">
+                                    <button onclick="safeClick()">Safe Click</button>
+                                </div>
+                                <div class="undo">
+                                    <button id="undo-button" onclick="clickUndoButton()">UNDO 👈</button>
                                 </div>
                             </div>
                         </td>
@@ -261,18 +269,6 @@
                         </td>
                         <td data-i="7" data-j="7">
                             a
-                        </td>
-                    </tr>
-                    <tr>
-                        <td id="cheats-container" colspan="8">
-                            <div class="cheats-container">
-                                <div class="safe-click-container">
-                                    <button onclick="safeClick()">Safe Click</button>
-                                </div>
-                                <div class="undo">
-                                    <button id="undo-button" onclick="clickUndoButton()">UNDO 👈</button>
-                                </div>
-                            </div>
                         </td>
                     </tr>
                 </tbody>
