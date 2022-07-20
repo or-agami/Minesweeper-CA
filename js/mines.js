@@ -5,7 +5,8 @@ const MINE = '💣'
 const FLAG = '🚩'
 
 function cellClicked(elCellI, elCellJ) {
-    const clickedCellLocation = { row: elCellI, col: elCellJ }
+    const clickedCellLocation = { i: elCellI, j: elCellJ }
+    console.log('clickedCellLocation:', clickedCellLocation);
     if (!gGame.isRunning) {
         gGame.isRunning = true
         fillMines(gBoard, clickedCellLocation)
@@ -16,14 +17,23 @@ function cellClicked(elCellI, elCellJ) {
 }
 
 function fillMines(board, skipCellLocation) {
-    let minesLeft = gLevel.mines
     console.log('skipping on:', skipCellLocation);
-    for (let i = 0; i < minesLeft; i++) {
-        while (condition) {
-            gBoard[getRandomInt()]
+    for (let i = 0; i < gLevel.mines;) {
+        const randomRow = getRandomInt(0, gBoard.length)
+        const randomCol = getRandomInt(0, gBoard[0].length)
+        const randomLocation = { i: randomRow, j: randomCol }
+        console.log('randomLocation:', randomLocation);
+        if (randomLocation !== skipCellLocation && cellIsEmpty(randomLocation)) {
+            i++
+            renderCell(randomLocation, MINE)
         }
+
     }
     console.log('board:', board);
+}
+
+function cellIsEmpty(location) {
+    return true
 }
 
 function getSafeCells() {

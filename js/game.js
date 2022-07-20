@@ -36,7 +36,7 @@ function levelSelect(size, mines, elButton) {
     gLevel.size = size
     gLevel.mines = mines
     gBoard = createBoard(size)
-    console.table(gBoard)
+    // console.table(gBoard)
     renderBoard(gBoard, '.board')
 }
 
@@ -45,7 +45,7 @@ function createBoard(size) {
     for (let i = 0; i < size; i++) {
         board.push([])
         for (let j = 0; j < size; j++) {
-            const location = { row: i, col: j }
+            const location = { i, j }
             board[i].push({ location, isClicked: false, isMine: false, content: EMPTY })
         }
     }

@@ -9,7 +9,7 @@ function renderBoard(mat, selector) {
         strHTML += '<tr>'
         for (var j = 0; j < mat[0].length; j++) {
 
-            const cell = mat[i][j]
+            const cell = mat[i][j].content
             const className = 'cell cell-' + i + '-' + j
             strHTML += `<td class="${className}" onclick="cellClicked(${i}, ${j})">${cell}</td>`
         }
