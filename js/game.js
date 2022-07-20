@@ -1,16 +1,13 @@
 'use strict'
 
-const EMPTY = ''
-const MINE = '💣'
-const FLAG = '🚩'
 
 var gBoard;
 var gLevel = {
-    size: 4,
-    mines: 2,
+    size: 0,
+    mines: 0,
 };
 var gGame = {
-    isOn: false,
+    isRunning: false,
     shownCount: 0,
     markedCount: 0,
     flagsCount: 0,
@@ -38,18 +35,21 @@ function levelSelect(size, mines, elButton) {
     }
     gLevel.size = size
     gLevel.mines = mines
-    printMat(createBoard(size), '.board')
+    gBoard = createBoard(size)
+    console.table(gBoard)
+    renderBoard(gBoard, '.board')
 }
 
-function createBoard(size, mines) {
-    gBoard = []
+function createBoard(size) {
+    const board = []
     for (let i = 0; i < size; i++) {
-        gBoard.push([])
+        board.push([])
         for (let j = 0; j < size; j++) {
-            gBoard[i].push(`${i + 1 * j + 1}`)
+            const location = { row: i, col: j }
+            board[i].push({ location, isClicked: false, isMine: false, content: EMPTY })
         }
     }
-    return gBoard
+    return board
 }
 
 // function startGame() {
