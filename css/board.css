@@ -1,16 +1,32 @@
-
-.game-flexbox {
-    height: 800px;
-    /* width: max-content; */
+.main-window {
     width: fit-content;
     position: relative;
     margin: 5px auto;
 }
 
-.game-flexbox .game-container,
-.game-flexbox .high-scores {
+.game-settings,
+.game-container,
+.high-scores {
+    vertical-align: top;
     display: inline-block;
-    height: fit-content;
+}
+
+.game-settings {
+    text-align: center;
+    height: 280px;
+}
+
+.game-settings,
+.high-scores {
+    width: 220px;
+    margin: 30px;
+    background-color: #CFD7C7;
+    padding: 0 20px;
+    border-radius: 20px;
+}
+
+.game-settings .difficulty-buttons {
+    margin-bottom: 80px;
 }
 
 .game-container .board td {
@@ -20,7 +36,8 @@
     border: 2px solid white;
 }
 
-.help-container, .cheats-container {
+.help-container,
+.cheats-container {
     display: flex;
     width: 100%;
     align-items: center;
@@ -41,13 +58,4 @@
 .stat-count * {
     display: inline-block;
     margin: 0 8px;
-}
-
-.high-scores {
-    float: inline-end;
-    margin: 50px;
-    margin-top: auto;
-    background-color: #CFD7C7;
-    padding: 0 20px;
-    border-radius: 20px;
 }

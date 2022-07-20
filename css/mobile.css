@@ -1,0 +1,19 @@
+@media (max-width: 790px) {
+
+    .game-settings,
+    .game-container,
+    .high-scores {
+        display: block;
+        height: fit-content;
+    }
+
+    .game-settings .difficulty-buttons,
+    .game-settings .mods-buttons {
+        display: inline-block;
+        margin: 10px auto;
+    }
+
+    .game-settings button {
+        margin: 20px auto;
+    }
+}
