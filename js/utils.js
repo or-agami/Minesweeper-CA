@@ -25,7 +25,8 @@ function renderBoard(mat, selector) {
 function renderCell(location, value) { // location such as: {i: 2, j: 7}
     // Select the elCell and set the value
     const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
-    if (!isNaN(value)) {
+    
+    if ((!isNaN(value) && (value)) || value === 0) {
         elCell.removeAttribute('data-content')
         elCell.classList.add("cleared")
     }

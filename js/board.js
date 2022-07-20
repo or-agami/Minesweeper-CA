@@ -34,7 +34,6 @@ function fillMines(board, skipCellLocation) {
         const randomRow = getRandomInt(0, board.length)
         const randomCol = getRandomInt(0, board[0].length)
         const randomLocation = { i: randomRow, j: randomCol }
-        console.log('randomLocation:', randomLocation);
         if ((randomRow !== skipCellLocation.i ||
             randomCol !== skipCellLocation.j) &&
             cellIsEmpty(randomLocation)) {
@@ -72,13 +71,15 @@ function getSafeCells() {
 function checkCell(cellLocation, rightClicked = false) {
     let gBoardContent = gBoard[cellLocation.i][cellLocation.j].content
     if (rightClicked) {
-        if (gBoardContent === EMPTY) {
-            gBoard[cellLocation.i][cellLocation.j].content = FLAG
-            renderCell(cellLocation, FLAG)
+        console.log('gBoard[cellLocation.i][cellLocation.j].isFlagged:', gBoard[cellLocation.i][cellLocation.j].isFlagged);
+        console.log('cellLocation:', cellLocation);
+        if (gBoard[cellLocation.i][cellLocation.j].isFlagged) {
+            gBoard[cellLocation.i][cellLocation.j].isFlagged = false
+            renderCell(cellLocation, EMPTY)
         }
         else {
-            gBoard[cellLocation.i][cellLocation.j].content = EMPTY
-            renderCell(cellLocation, EMPTY)
+            gBoard[cellLocation.i][cellLocation.j].isFlagged = true
+            renderCell(cellLocation, FLAG)
         }
         return
     }
