@@ -20,14 +20,12 @@
         <button onclick="initGame(12, 30)">Expert</button>
     </div>
 
-    <div class="page-flexbox">
-        <div class="game-buttons">
-            <button onclick="safeClick()">Safe Click</button>
-            <!-- <p id="safe-click"></p> do this inside board -->
-            <button id="manual-mode-button" onclick="clickManualModeButton()">Manual Mode</button>
-            <button id="boom-button" onclick="clickBoomButton()">7 BOOM!</button>
-            <button id="undo-button" onclick="clickUndoButton()">UNDO &nbsp&nbsp&nbsp👈</button>
-        </div>
+    <div class="settings-buttons">
+        <button id="manual-mode-button" onclick="clickManualModeButton()">Manual Mode</button>
+        <button id="boom-button" onclick="clickBoomButton()">7 BOOM!</button>
+    </div>
+
+    <div class="game-flexbox">
 
         <div class="game-container">
             <table>
@@ -42,7 +40,82 @@
                         </td>
                     </tr>
                 </thead>
-                <tbody class="board"></tbody>
+                <tbody class="board">
+                    <tr>
+                        <td data-i="0" data-j="0">
+                            a
+                        </td>
+                        <td data-i="0" data-j="1">
+                            a
+                        </td>
+                        <td data-i="0" data-j="2">
+                            a
+                        </td>
+                        <td data-i="0" data-j="3">
+                            a
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-i="1" data-j="0">
+                            a
+                        </td>
+                        <td data-i="1" data-j="1">
+                            a
+                        </td>
+                        <td data-i="1" data-j="2">
+                            a
+                        </td>
+                        <td data-i="1" data-j="3">
+                            a
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-i="2" data-j="0">
+                            a
+                        </td>
+                        <td data-i="2" data-j="1">
+                            a
+                        </td>
+                        <td data-i="2" data-j="2">
+                            a
+                        </td>
+                        <td data-i="2" data-j="3">
+                            a
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-i="3" data-j="0">
+                            a
+                        </td>
+                        <td data-i="3" data-j="1">
+                            a
+                        </td>
+                        <td data-i="3" data-j="2">
+                            a
+                        </td>
+                        <td data-i="3" data-j="3" onclick="cellClicked(this)">
+                            a
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="help-container">
+                                <div class="lives-count">💗💗💗</div>
+                                <div class="hints-count" onclick="clickHint(this)">💡💡💡</div>
+                            </div>
+                            <div class="cheats-container">
+                                <div class="safe-click-container">
+                                    <button onclick="safeClick()">Safe Click</button>
+                                    <p id="safe-click">safe</p>
+
+                                </div>
+                                <div class="undo">
+                                    <button id="undo-button" onclick="clickUndoButton()">UNDO &nbsp&nbsp&nbsp👈</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
 
@@ -54,7 +127,7 @@
         </div>
     </div>
     </div>
-
+    <!-- 
     <div class="boards">
 
         <div class="stats-container"></div>
@@ -63,16 +136,14 @@
 
     </div>
 
-    <!-- The Modal -->
     <div id="myModal" class="modal">
 
-        <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
             <h3>fdff</h3><button onclick="playAgain()">Play Again</button>
         </div>
 
-    </div>
+    </div> -->
 
     <script src="js/utils.js"></script>
     <script src="js/game.js"></script>
