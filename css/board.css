@@ -1,0 +1,53 @@
+
+.game-flexbox {
+    height: 800px;
+    /* width: max-content; */
+    width: fit-content;
+    position: relative;
+    margin: 5px auto;
+}
+
+.game-flexbox .game-container,
+.game-flexbox .high-scores {
+    display: inline-block;
+    height: fit-content;
+}
+
+.game-container .board td {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border: 2px solid white;
+}
+
+.help-container, .cheats-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    background-color: #40798C;
+}
+
+.lives-count,
+.stat-count,
+.spoil-count,
+.safe-click-container,
+.undo {
+    display: inline-block;
+    width: fit-content;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.stat-count * {
+    display: inline-block;
+    margin: 0 8px;
+}
+
+.high-scores {
+    float: inline-end;
+    margin: 50px;
+    margin-top: auto;
+    background-color: #CFD7C7;
+    padding: 0 20px;
+    border-radius: 20px;
+}

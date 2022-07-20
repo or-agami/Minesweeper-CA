@@ -8,6 +8,7 @@
     <title>Minesweeper</title>
     <link rel="icon" href="assets/icon/Minesweepr-Icon.png" type="image/icon type">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/board.css">
 </head>
 
 <body onload="initGame()">
@@ -31,11 +32,24 @@
             <table>
                 <thead>
                     <tr>
-                        <td class="board-header">
-                            <div class="flex-header">
-                                <div class="flags-count">002</div>
-                                <button onclick="initGame()">🙂</button>
-                                <div class="timer">000</div>
+                        <td class="board-header" colspan="8">
+                            <div class="help-container">
+                                <div class="lives-count">
+                                    <p>Lives left:</p>
+                                    <p id="lives-count">💗💗💗</p>
+                                </div>
+                                <div class="stat-count" onclick="initGame()">
+                                    <p class="flags-count">002</p>
+                                    <!-- <div class="flags-count">002</div> -->
+                                    <p class="emoji">🙂</p>
+                                    <!-- <button onclick="initGame()">🙂</button> -->
+                                    <p class="timer">000</p>
+                                    <!-- <div class="timer">000</div> -->
+                                </div>
+                                <div class="spoil-count" onclick="spoilClick(this)">
+                                    <p>spoil:</p>
+                                    <p id="spoil-count">💡💡💡</p>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -54,6 +68,18 @@
                         <td data-i="0" data-j="3">
                             a
                         </td>
+                        <td data-i="0" data-j="4">
+                            a
+                        </td>
+                        <td data-i="0" data-j="5">
+                            a
+                        </td>
+                        <td data-i="0" data-j="6">
+                            a
+                        </td>
+                        <td data-i="0" data-j="7">
+                            a
+                        </td>
                     </tr>
                     <tr>
                         <td data-i="1" data-j="0">
@@ -66,6 +92,18 @@
                             a
                         </td>
                         <td data-i="1" data-j="3">
+                            a
+                        </td>
+                        <td data-i="1" data-j="4">
+                            a
+                        </td>
+                        <td data-i="1" data-j="5">
+                            a
+                        </td>
+                        <td data-i="1" data-j="6">
+                            a
+                        </td>
+                        <td data-i="1" data-j="7">
                             a
                         </td>
                     </tr>
@@ -82,6 +120,18 @@
                         <td data-i="2" data-j="3">
                             a
                         </td>
+                        <td data-i="2" data-j="4">
+                            a
+                        </td>
+                        <td data-i="2" data-j="5">
+                            a
+                        </td>
+                        <td data-i="2" data-j="6">
+                            a
+                        </td>
+                        <td data-i="2" data-j="7">
+                            a
+                        </td>
                     </tr>
                     <tr>
                         <td data-i="3" data-j="0">
@@ -93,24 +143,134 @@
                         <td data-i="3" data-j="2">
                             a
                         </td>
-                        <td data-i="3" data-j="3" onclick="cellClicked(this)">
+                        <td data-i="3" data-j="3">
+                            a
+                        </td>
+                        <td data-i="3" data-j="4">
+                            a
+                        </td>
+                        <td data-i="3" data-j="5">
+                            a
+                        </td>
+                        <td data-i="3" data-j="6">
+                            a
+                        </td>
+                        <td data-i="3" data-j="7">
                             a
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">
-                            <div class="help-container">
-                                <div class="lives-count">💗💗💗</div>
-                                <div class="hints-count" onclick="clickHint(this)">💡💡💡</div>
-                            </div>
+                        <td data-i="4" data-j="0">
+                            a
+                        </td>
+                        <td data-i="4" data-j="1">
+                            a
+                        </td>
+                        <td data-i="4" data-j="2">
+                            a
+                        </td>
+                        <td data-i="4" data-j="3">
+                            a
+                        </td>
+                        <td data-i="4" data-j="4">
+                            a
+                        </td>
+                        <td data-i="4" data-j="5">
+                            a
+                        </td>
+                        <td data-i="4" data-j="6">
+                            a
+                        </td>
+                        <td data-i="4" data-j="7">
+                            a
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-i="5" data-j="0">
+                            a
+                        </td>
+                        <td data-i="5" data-j="1">
+                            a
+                        </td>
+                        <td data-i="5" data-j="2">
+                            a
+                        </td>
+                        <td data-i="5" data-j="3">
+                            a
+                        </td>
+                        <td data-i="5" data-j="4">
+                            a
+                        </td>
+                        <td data-i="5" data-j="5">
+                            a
+                        </td>
+                        <td data-i="5" data-j="6">
+                            a
+                        </td>
+                        <td data-i="5" data-j="7">
+                            a
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-i="6" data-j="0">
+                            a
+                        </td>
+                        <td data-i="6" data-j="1">
+                            a
+                        </td>
+                        <td data-i="6" data-j="2">
+                            a
+                        </td>
+                        <td data-i="6" data-j="3">
+                            a
+                        </td>
+                        <td data-i="6" data-j="4">
+                            a
+                        </td>
+                        <td data-i="6" data-j="5">
+                            a
+                        </td>
+                        <td data-i="6" data-j="6">
+                            a
+                        </td>
+                        <td data-i="6" data-j="7">
+                            a
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-i="7" data-j="0">
+                            a
+                        </td>
+                        <td data-i="7" data-j="1">
+                            a
+                        </td>
+                        <td data-i="7" data-j="2">
+                            a
+                        </td>
+                        <td data-i="7" data-j="3">
+                            a
+                        </td>
+                        <td data-i="7" data-j="4">
+                            a
+                        </td>
+                        <td data-i="7" data-j="5">
+                            a
+                        </td>
+                        <td data-i="7" data-j="6">
+                            a
+                        </td>
+                        <td data-i="7" data-j="7">
+                            a
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="cheats-container" colspan="8">
                             <div class="cheats-container">
                                 <div class="safe-click-container">
                                     <button onclick="safeClick()">Safe Click</button>
-                                    <p id="safe-click">safe</p>
-
                                 </div>
                                 <div class="undo">
-                                    <button id="undo-button" onclick="clickUndoButton()">UNDO &nbsp&nbsp&nbsp👈</button>
+                                    <button id="undo-button" onclick="clickUndoButton()">UNDO 👈</button>
                                 </div>
                             </div>
                         </td>
@@ -147,8 +307,7 @@
 
     <script src="js/utils.js"></script>
     <script src="js/game.js"></script>
-    <script src="js/pacman.js"></script>
-    <script src="js/ghost.js"></script>
+    <script src="js/timer.js"></script>
 </body>
 
 </html>
