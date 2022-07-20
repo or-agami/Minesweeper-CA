@@ -6,25 +6,17 @@ const FLAG = '🚩'
 
 function cellClicked(elCellI, elCellJ) {
     const lClickedCellLocation = { i: elCellI, j: elCellJ }
-    console.log('lClickedCellLocation:', lClickedCellLocation);
-    if (!gGame.isRunning) {
-        gGame.isRunning = true
-        fillMines(gBoard, lClickedCellLocation)
-        // checkCell(lClickedCellLocation)
-        startTimer()
-    }
+    // console.log('lClickedCellLocation:', lClickedCellLocation);
+    if (!gGame.isRunning) startGame(lClickedCellLocation)
+
     checkCell(lClickedCellLocation)
 }
 
 function cellRightClicked(elCellI, elCellJ) {
     const rClickedCellLocation = { i: elCellI, j: elCellJ }
-    console.log('rClickedCellLocation:', rClickedCellLocation);
-    if (!gGame.isRunning) {
-        gGame.isRunning = true
-        fillMines(gBoard, rClickedCellLocation)
-        // checkCell(rClickedCellLocation)
-        startTimer()
-    }
+    // console.log('rClickedCellLocation:', rClickedCellLocation);
+    if (!gGame.isRunning) startGame(rClickedCellLocation)
+
     checkCell(rClickedCellLocation, true)
 
 }
@@ -68,31 +60,40 @@ function getSafeCells() {
     return safeCells
 }
 
-function checkCell(cellLocation, rightClicked = false) {
-    let gBoardContent = gBoard[cellLocation.i][cellLocation.j].content
+function checkCell(location, rightClicked = false) {
+    let gBoardContent = gBoard[location.i][location.j].content
     if (rightClicked) {
-        console.log('gBoard[cellLocation.i][cellLocation.j].isFlagged:', gBoard[cellLocation.i][cellLocation.j].isFlagged);
-        console.log('cellLocation:', cellLocation);
-        if (gBoard[cellLocation.i][cellLocation.j].isFlagged) {
-            gBoard[cellLocation.i][cellLocation.j].isFlagged = false
-            renderCell(cellLocation, EMPTY)
+        if (gBoard[location.i][location.j].isFlagged) {
+            gBoard[location.i][location.j].isFlagged = false
+            gGame.flagsCount--
+            // let mineInCell = (gBoardContent === MINE) ? true : false
+            // renderCell(location, EMPTY, mineInCell)
+            renderCell(location, EMPTY)
         }
         else {
-            gBoard[cellLocation.i][cellLocation.j].isFlagged = true
-            renderCell(cellLocation, FLAG)
+            gBoard[location.i][location.j].isFlagged = true
+            gGame.flagsCount++
+            renderCell(location, FLAG)
         }
-        return
+    } else {
+        if (gBoard[location.i][location.j].isFlagged) return
+        switch (gBoardContent) {
+            case EMPTY:
+                gBoard[location.i][location.j].content = countNeighbors(location, gBoard, MINE)
+                gGame.clearedCount++
+                break
+            case MINE:
+                console.log('You Dead:', MINE);
+
+                break
+            case FLAG:
+                console.log('FLAG:', FLAG);
+                break
+        }
+        renderCell(location, gBoard[location.i][location.j].content, true)
     }
-    switch (gBoardContent) {
-        case EMPTY:
-            gBoardContent = countNeighbors(cellLocation, gBoard, MINE)
-            renderCell(cellLocation, gBoardContent)
-            break
-        case MINE:
-            console.log('You Dead:', MINE);
-            break
-        case FLAG:
-            console.log('FLAG:', FLAG);
-            break
-    }
+    console.log(`(${gGame.flagsCount} === ${gLevel.mines}):`, (gGame.flagsCount === gLevel.mines));
+    console.log(`(${gGame.clearedCount} === ${gLevel.size} ** 2 - ${gLevel.mines}):`, (gGame.clearedCount === gLevel.size ** 2 - gLevel.mines));
+    if ((gGame.flagsCount === gLevel.mines) &&
+        (gGame.clearedCount === gLevel.size ** 2 - gLevel.mines)) endGame(true)
 }

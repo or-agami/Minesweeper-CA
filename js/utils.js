@@ -22,11 +22,15 @@ function renderBoard(mat, selector) {
 }
 
 // Cell rendering
-function renderCell(location, value) { // location such as: {i: 2, j: 7}
+function renderCell(location, value, show = false) { // location such as: {i: 2, j: 7}
     // Select the elCell and set the value
     const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
-    
-    if ((!isNaN(value) && (value)) || value === 0) {
+
+    // if ((!isNaN(value) && (value)) || value === 0) {
+    //     elCell.removeAttribute('data-content')
+    //     elCell.classList.add("cleared")
+    // }
+    if (show) {
         elCell.removeAttribute('data-content')
         elCell.classList.add("cleared")
     }
@@ -52,7 +56,7 @@ function countNeighbors(cellLocation, board, value) {
             }
         }
     }
-    console.log('neighborsCount:', neighborsCount);
+    // console.log('neighborsCount:', neighborsCount);
     return neighborsCount;
 }
 

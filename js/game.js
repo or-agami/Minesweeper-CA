@@ -9,24 +9,28 @@ var gLevel = {
 var gGame = {
     isRunning: false,
     shownCount: 0,
-    markedCount: 0,
+    clearedCount: 0,
     flagsCount: 0,
     interval: 0,
-    startTime: 0,
     livesCount: 3,
     spoilCount: 3,
 };
 
 window.oncontextmenu = () => {return false}
 
-function initGame(size = 4, mines = 2) {
-    const elDefaultLevel = document.querySelector('.difficulty-buttons button')
-    elDefaultLevel.style.backgroundColor = '#40798C'
-    levelSelect(size, mines, elDefaultLevel)
+function initGame(size = 4, mines = 2, elSelectedLevel) {
+    // if no level selected, beginner level is auto selected
+    elSelectedLevel = (typeof elSelectedLevel !== 'undefined') ?  elSelectedLevel : document.getElementById(`size-${size}`)
+    clearInterval(gGame.interval)
+    gLevel.size = size
+    gLevel.mines = mines
+    elSelectedLevel.style.backgroundColor = '#40798C'
+
+    gBoard = createBoard(size)
+    renderBoard(gBoard, '.board')
 }
 
 function levelSelect(size, mines, elButton) {
-    clearInterval(gGame.interval)
     const elButtons = document.querySelectorAll('.difficulty-buttons button')
     for (let i = 0; i < elButtons.length; i++) {
         const elLevelButton = elButtons[i];
@@ -35,11 +39,8 @@ function levelSelect(size, mines, elButton) {
         }
         else elLevelButton.removeAttribute('style')
     }
-    gLevel.size = size
-    gLevel.mines = mines
-    gBoard = createBoard(size)
+    initGame(size, mines, elButton)
     // console.table(gBoard)
-    renderBoard(gBoard, '.board')
 }
 
 function createBoard(size) {
@@ -54,6 +55,16 @@ function createBoard(size) {
     return board
 }
 
-// function startGame() {
-    
-// }
+function startGame(avoidCell) {
+    gGame.isRunning = true
+    fillMines(gBoard, avoidCell)
+    startTimer()   
+}
+
+function endGame(playerWon) {
+    if (playerWon) {
+        alert('You Won')
+    } else {
+        alert('Game Over')
+    }
+}
