@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Minesweeper</title>
+    <link rel="icon" href="assets/icon/Minesweepr-Icon.png" type="image/icon type">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body onload="initGame()">
+
+    <h1 class="header">💥Minesweeper💥</h1>
+
+    <div class="difficulty-buttons">
+        <button onclick="initGame(4, 2)">Beginner</button>
+        <button onclick="initGame(8, 12)">Medium</button>
+        <button onclick="initGame(12, 30)">Expert</button>
+    </div>
+
+    <div class="page-flexbox">
+        <div class="game-buttons">
+            <button onclick="safeClick()">Safe Click</button>
+            <!-- <p id="safe-click"></p> do this inside board -->
+            <button id="manual-mode-button" onclick="clickManualModeButton()">Manual Mode</button>
+            <button id="boom-button" onclick="clickBoomButton()">7 BOOM!</button>
+            <button id="undo-button" onclick="clickUndoButton()">UNDO &nbsp&nbsp&nbsp👈</button>
+        </div>
+
+        <div class="game-container">
+            <table>
+                <thead>
+                    <tr>
+                        <td class="board-header">
+                            <div class="flex-header">
+                                <div class="flags-count">002</div>
+                                <button onclick="initGame()">🙂</button>
+                                <div class="timer">000</div>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody class="board"></tbody>
+            </table>
+        </div>
+
+        <div class="high-scores">
+            <h2>High Scores:</h2>
+            <h3>Beginner: <span id="beginner-score"></span></h3>
+            <h3>Medium: <span id="medium-score"></span></h3>
+            <h3>Expert: <span id="expert-score"></span></h3>
+        </div>
+    </div>
+    </div>
+
+    <div class="boards">
+
+        <div class="stats-container"></div>
+
+        <div class="game-container"></div>
+
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>fdff</h3><button onclick="playAgain()">Play Again</button>
+        </div>
+
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/pacman.js"></script>
+    <script src="js/ghost.js"></script>
+</body>
+
+</html>
