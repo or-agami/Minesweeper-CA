@@ -17,6 +17,8 @@ var gGame = {
     spoilCount: 3,
 };
 
+window.oncontextmenu = () => {return false}
+
 function initGame(size = 4, mines = 2) {
     const elDefaultLevel = document.querySelector('.difficulty-buttons button')
     elDefaultLevel.style.backgroundColor = '#40798C'

@@ -5,15 +5,28 @@ const MINE = '💣'
 const FLAG = '🚩'
 
 function cellClicked(elCellI, elCellJ) {
-    const clickedCellLocation = { i: elCellI, j: elCellJ }
-    console.log('clickedCellLocation:', clickedCellLocation);
+    const lClickedCellLocation = { i: elCellI, j: elCellJ }
+    console.log('lClickedCellLocation:', lClickedCellLocation);
     if (!gGame.isRunning) {
         gGame.isRunning = true
-        fillMines(gBoard, clickedCellLocation)
+        fillMines(gBoard, lClickedCellLocation)
+        // checkCell(lClickedCellLocation)
         startTimer()
-    } else {
-        checkCell(clickedCellLocation)
     }
+    checkCell(lClickedCellLocation)
+}
+
+function cellRightClicked(elCellI, elCellJ) {
+    const rClickedCellLocation = { i: elCellI, j: elCellJ }
+    console.log('rClickedCellLocation:', rClickedCellLocation);
+    if (!gGame.isRunning) {
+        gGame.isRunning = true
+        fillMines(gBoard, rClickedCellLocation)
+        // checkCell(rClickedCellLocation)
+        startTimer()
+    }
+    checkCell(rClickedCellLocation, true)
+
 }
 
 function fillMines(board, skipCellLocation) {
@@ -56,11 +69,22 @@ function getSafeCells() {
     return safeCells
 }
 
-function checkCell(cellLocation) {
+function checkCell(cellLocation, rightClicked = false) {
     let gBoardContent = gBoard[cellLocation.i][cellLocation.j].content
+    if (rightClicked) {
+        if (gBoardContent === EMPTY) {
+            gBoard[cellLocation.i][cellLocation.j].content = FLAG
+            renderCell(cellLocation, FLAG)
+        }
+        else {
+            gBoard[cellLocation.i][cellLocation.j].content = EMPTY
+            renderCell(cellLocation, EMPTY)
+        }
+        return
+    }
     switch (gBoardContent) {
         case EMPTY:
-            gBoardContent = countNeighbors(cellLocation, gBoard)
+            gBoardContent = countNeighbors(cellLocation, gBoard, MINE)
             renderCell(cellLocation, gBoardContent)
             break
         case MINE:
@@ -70,25 +94,4 @@ function checkCell(cellLocation) {
             console.log('FLAG:', FLAG);
             break
     }
-}
-
-// Neighbors Count
-function countNeighbors(cellLocation, board) {
-    const cellI = cellLocation.i
-    const cellJ = cellLocation.j
-    let neighborsCount = 0;
-
-    for (let i = cellI - 1; i <= cellI + 1; i++) {
-        if (i < 0 || i >= board.length) continue;
-
-        for (let j = cellJ - 1; j <= cellJ + 1; j++) {
-            if (i === cellI && j === cellJ) continue;
-            if (j < 0 || j >= board[i].length) continue;
-            if (board[i][j].content === MINE) {
-                neighborsCount++
-            }
-        }
-    }
-    console.log('neighborsCount:', neighborsCount);
-    return neighborsCount;
 }
