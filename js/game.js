@@ -6,18 +6,18 @@ const FLAG = '🚩'
 
 var gBoard;
 var gLevel = {
-	size: 4,
-	mines: 2,
+    size: 4,
+    mines: 2,
 };
 var gGame = {
-	isOn: false,
-	shownCount: 0,
-	markedCount: 0,
-	flagsCount: 0,
-	interval: 0,
-	startTime: 0,
-	livesCount: 3,
-	spoilCount: 3,
+    isOn: false,
+    shownCount: 0,
+    markedCount: 0,
+    flagsCount: 0,
+    interval: 0,
+    startTime: 0,
+    livesCount: 3,
+    spoilCount: 3,
 };
 
 function initGame(size = 4, mines = 2) {
@@ -38,17 +38,15 @@ function levelSelect(size, mines, elButton) {
     }
     gLevel.size = size
     gLevel.mines = mines
-    const elBoard = document.querySelector('.board')
-    // printMat(createBoard(size), elBoard)
-    console.log('createBoard(size):', createBoard(size));
+    printMat(createBoard(size), '.board')
 }
 
 function createBoard(size, mines) {
     gBoard = []
     for (let i = 0; i < size; i++) {
-        gBoard
+        gBoard.push([])
         for (let j = 0; j < size; j++) {
-            gBoard[i][j] = `${j}`
+            gBoard[i].push(`${i + 1 * j + 1}`)
         }
     }
     return gBoard
