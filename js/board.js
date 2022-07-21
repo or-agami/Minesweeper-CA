@@ -3,12 +3,12 @@
 const EMPTY = ''
 const MINE = '💣'
 const FLAG = '🚩'
-var mineLocations = []
+var mineLocations
 
 function cellClicked(elCellI, elCellJ) {
     const lClickedCellLocation = { i: elCellI, j: elCellJ }
     // console.log('lClickedCellLocation:', lClickedCellLocation);
-    if (!gGame.isRunning) startGame(lClickedCellLocation)
+    if (!gGame.isRunning && !gGame.isOver) startGame(lClickedCellLocation)
 
     checkCell(lClickedCellLocation)
 }
@@ -16,7 +16,8 @@ function cellClicked(elCellI, elCellJ) {
 function cellRightClicked(elCellI, elCellJ) {
     const rClickedCellLocation = { i: elCellI, j: elCellJ }
     // console.log('rClickedCellLocation:', rClickedCellLocation);
-    if (!gGame.isRunning) startGame(rClickedCellLocation)
+    if (!gGame.isRunning && !
+        gGame.isOver) startGame(rClickedCellLocation)
 
     checkCell(rClickedCellLocation, true)
 
@@ -30,10 +31,10 @@ function fillMines(board, skipCellLocation) {
         if ((randomRow !== skipCellLocation.i ||
             randomCol !== skipCellLocation.j) &&
             cellIsEmpty(randomLocation)) {
-                i++
-                // Model:
-                board[randomRow][randomCol].content = MINE
-                mineLocations.push(randomLocation)
+            i++
+            // Model:
+            board[randomRow][randomCol].content = MINE
+            mineLocations.push(randomLocation)
             // DOM:
             renderCell(randomLocation, MINE)
         }
@@ -65,6 +66,7 @@ function getSafeCells() {
 
 function checkCell(location, rightClicked = false) {
     let gBoardContent = gBoard[location.i][location.j].content
+    if (gGame.isOver) return
     if (rightClicked) {
         if (gBoard[location.i][location.j].isFlagged) {
             gBoard[location.i][location.j].isFlagged = false
@@ -78,16 +80,20 @@ function checkCell(location, rightClicked = false) {
             gGame.flagsCount++
             renderCell(location, FLAG)
         }
+        const elMineCount = document.querySelector('.mine-count')
+        elMineCount.innerText = ((gLevel.mines - gGame.flagsCount) <= 9) ? `00${gLevel.mines - gGame.flagsCount}` : `0${gLevel.mines - gGame.flagsCount}`
     } else {
         if (gBoard[location.i][location.j].isFlagged) return
         switch (gBoardContent) {
             case EMPTY:
                 gBoard[location.i][location.j].content = countNeighbors(location, gBoard, MINE)
                 gGame.clearedCount++
+                // revealEmptyNeighbors(location)
                 break
             case MINE:
-                endGame(false)
-                break
+                // endGame(false)
+                revealMines()
+                return
             case FLAG:
                 console.log('FLAG:', FLAG);
                 break

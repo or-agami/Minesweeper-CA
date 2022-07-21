@@ -1,13 +1,14 @@
 'use strict'
 
 
-var gBoard;
+var gBoard
 var gLevel = {
     size: 0,
     mines: 0,
 };
 var gGame = {
     isRunning: false,
+    isOver: false,
     shownCount: 0,
     clearedCount: 0,
     flagsCount: 0,
@@ -16,16 +17,29 @@ var gGame = {
     spoilCount: 3,
 };
 
-window.oncontextmenu = () => {return false}
+window.oncontextmenu = () => { return false }
 
 function initGame(size = 4, mines = 2, elSelectedLevel) {
     // if no level selected, beginner level is auto selected
-    elSelectedLevel = (typeof elSelectedLevel !== 'undefined') ?  elSelectedLevel : document.getElementById(`size-${size}`)
+    // console.log('elSelectedLevel:', elSelectedLevel);
+    // console.log('typeof elSelectedLevel:', typeof elSelectedLevel);
+    console.log('typeof elSelectedLevel !== undefined:', ((typeof elSelectedLevel) !== `undefined`));
+    console.log('size:', size);
+    elSelectedLevel = ((typeof elSelectedLevel) !== 'undefined') ? elSelectedLevel : document.getElementById(`size-${size}`)
+    const elEmoji = document.querySelector('.emoji')
+    const elMineCount = document.querySelector('.mine-count')
+    elMineCount.innerText = (mines <= 9) ? `00${mines}` : `0${mines}`
+    elEmoji.innerText = `🙂`
     clearInterval(gGame.interval)
+    
     resetTimer()
     gLevel.size = size
     gLevel.mines = mines
     elSelectedLevel.style.backgroundColor = '#40798C'
+    mineLocations = []
+    gGame = {
+        isRunning: false, isOver: false, shownCount: 0, clearedCount: 0, flagsCount: 0, interval: 0, livesCount: 3, spoilCount: 3,
+    }
 
     gBoard = createBoard(size)
     renderBoard(gBoard, '.board')
@@ -33,6 +47,8 @@ function initGame(size = 4, mines = 2, elSelectedLevel) {
 
 function levelSelect(size, mines, elButton) {
     const elButtons = document.querySelectorAll('.difficulty-buttons button')
+    const elEmoji = document.querySelector('.emoji')
+    elEmoji.setAttribute(`onclick`, `initGame(${size}, ${mines})`)
     for (let i = 0; i < elButtons.length; i++) {
         const elLevelButton = elButtons[i];
         if (elButton === elLevelButton) {
@@ -50,7 +66,7 @@ function createBoard(size) {
         board.push([])
         for (let j = 0; j < size; j++) {
             const location = { i, j }
-            board[i].push({ location, isClicked: false, isMine: false, isFlagged: false, content: EMPTY })
+            board[i].push({ location, isClicked: false, isMine: false, isFlagged: false, isRevealed: false, content: EMPTY })
         }
     }
     return board
@@ -59,17 +75,22 @@ function createBoard(size) {
 function startGame(avoidCell) {
     gGame.isRunning = true
     fillMines(gBoard, avoidCell)
-    startTimer()   
+    startTimer()
 }
 
 function endGame(playerWon) {
     stopTimer()
+    gGame.isRunning = false
+    gGame.isOver = true
+    const elEmoji = document.querySelector('.emoji')
     if (playerWon) {
-        alert('You Won')
+        elEmoji.innerText = '😁'
+        // alert('You Won')
     } else {
-        for (let i = 0; i < mineLocations.length; i++) {
-            renderCell(mineLocations[i], MINE, true)
-        }
+        // for (let i = 0; i < mineLocations.length; i++) {
+        //     renderCell(mineLocations[i], MINE, true)
+        // }
+        elEmoji.innerText = '😖'
         // alert('Game Over')
     }
 }
