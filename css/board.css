@@ -61,16 +61,20 @@
     background-color: #40798C;
 }
 
-.flagged {
-    background-color: black;
-}
 
 .hidden {
-    /* background-color: red; */
+    background-color: red;
     background-color: black;
     text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.flagged {
+    background-color: black;
+    text-indent: initial;
+    white-space: initial;
+    overflow: initial;
 }
 
 /* [data-content] {

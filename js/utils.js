@@ -21,7 +21,7 @@ function renderBoard(mat, selector) {
             var className = `cell cell-${i}-${j}`
             if (cell.isFlagged) className += ' flagged'
             className += (cell.isRevealed) ? ' cleared' : ' hidden'
-            // className += ()
+            // className += (cell.)
 
             strHTML += `<td class="${className}" ${cellData} onclick="cellClicked(${i}, ${j})" oncontextmenu="cellRightClicked(${i}, ${j})">${cellContent}</td>`
         }
@@ -33,18 +33,26 @@ function renderBoard(mat, selector) {
 }
 
 // Cell rendering
-function renderCell(location, value, show = false) { // location such as: {i: 2, j: 7}
+function renderCell(location, value, show = false, isRightClick = false) { // location such as: {i: 2, j: 7}
     // Select the elCell and set the value
     const elCell = document.querySelector(`[data-location="${location.i}-${location.j}"]`)
+    if (value === 0) value = EMPTY
 
     if (show || gBoard[location.i][location.j].isRevealed) elCell.classList.remove('hidden')
 
+    // if (value === EMPTY && (!gBoard[location.i][location.j].isRevealed)) {
+    //     recursionOpening(location.i, location.j, value)
+    // }
+    if ((value === EMPTY) && (!isRightClick)) {
+        console.log(`location.i: ${location.i}, location.j: ${location.j}`);
+        recursionOpening(location.i, location.j, value)
+    }
 
     if (value === FLAG || elCell.classList.contains('flagged')) {
+        // elCell.classList.toggle('hidden')
         elCell.classList.toggle('flagged')
-        elCell.classList.toggle('hidden')
     } else {
-        // elCell.classList.add('hidden')
+        // elCell.classList.toggle('flagged')
     }
     elCell.innerHTML = value
 
@@ -78,6 +86,49 @@ function countNeighbors(cellLocation, board, value) {
     }
     // console.log('neighborsCount:', neighborsCount);
     return neighborsCount;
+}
+
+// Recursion opening
+function recursionOpening(row, col, value) {
+    console.log('hello');
+    // if (value !== EMPTY) {
+    //     console.log('recursionOpening: value:', value);
+    //     return
+    // }
+    
+
+    // if (row < 0 || row >= gBoard.length || col < 0 || col >= gBoard[0].length) {
+    //     return
+    // }
+
+    // if (gBoard[row][col].isMine) return
+
+    var nextRow
+    var nextCol
+
+    for (let i = row - 1; i <= row + 1; i++) {
+        if (i < 0 || i >= gBoard.length) continue;
+
+        for (let j = col - 1; j <= col + 1; j++) {
+            if (j < 0 || j >= gBoard[i].length) continue;
+            if (i === row && j === col) continue;
+            nextRow = i
+            nextCol = j
+            console.log(`nextRow: ${nextRow}, nextCol: ${nextCol}`);
+
+            // check if next location is in grid:
+            if ((nextRow >= 0 && nextRow < gBoard.length) && (nextCol >= 0 && nextCol < gBoard[i].length)) {
+                if (gBoard[nextRow][nextCol].isRevealed) continue
+                gBoard[nextRow][nextCol].isRevealed = true
+                // console.log('hello in final if');
+                // console.log('{ nextRow, nextCol }:', { i: nextRow, j: nextCol });
+                // renderCell({ i: nextRow, j: nextCol }, gRawBoard[nextRow][nextCol], true)
+                console.log('gRawBoard[nextRow][nextCol]:', gRawBoard[nextRow][nextCol]);
+                renderCell({ i: nextRow, j: nextCol }, gRawBoard[nextRow][nextCol], true)
+            }
+        }
+    }
+
 }
 
 // Get Random integer

@@ -3,7 +3,7 @@
 const EMPTY = ''
 const MINE = '💣'
 const FLAG = '🚩'
-var mineLocations
+var gRawBoard, mineLocations
 
 function cellClicked(elCellI, elCellJ) {
     const lClickedCellLocation = { i: elCellI, j: elCellJ }
@@ -50,37 +50,43 @@ function cellIsEmpty(location) {
     return false
 }
 
-function getSafeCells() {
-    const safeCells = []
-    for (let i = 0; i < gBoard.length; i++) {
-        safeCells.push([])
-        for (let j = 0; j < gBoard[i].length; j++) {
-            const cell = gBoard[i][j];
-            if (!cell.isMine) safeCells[i].push(cell.location)
+// get board with all known location (eg. cell with 2 neighbors mines cell = 2)
+function getRawBoard(board) {
+    gRawBoard = []
+    for (let i = 0; i < board.length; i++) {
+        gRawBoard.push([])
+        for (let j = 0; j < board[i].length; j++) {
+            const rawBoardCell = board[i][j];
+            if (rawBoardCell.isMine) gRawBoard[i].push(MINE)
+            else {
+                const cellNeighbos = countNeighbors({ i, j }, board, MINE)
+                if (cellNeighbos === EMPTY) gRawBoard[i].push(0)
+                else gRawBoard[i].push(cellNeighbos)
+            }
         }
     }
-    console.table(safeCells)
-    return safeCells
+    // console.table(gRawBoard)
+    return gRawBoard
 }
 
 
 function checkCell(location, rightClicked = false) {
     let gBoardContent = gBoard[location.i][location.j].content
+    if (gBoard[location.i][location.j].isRevealed) return
     if (gGame.isOver) return
     if (rightClicked) {
-        if (gBoard[location.i][location.j].isRevealed) return
         if (gBoard[location.i][location.j].isFlagged) {
             gBoard[location.i][location.j].isFlagged = false
             gGame.flagsCount--
             // elMineCount
             // let mineInCell = (gBoardContent === MINE) ? true : false
             // renderCell(location, EMPTY, mineInCell)
-            renderCell(location, EMPTY)
+            renderCell(location, EMPTY, false, rightClicked)
         }
         else {
             gBoard[location.i][location.j].isFlagged = true
             gGame.flagsCount++
-            renderCell(location, FLAG)
+            renderCell(location, FLAG, false, rightClicked)
         }
         const elMineCount = document.querySelector('.mine-count')
         elMineCount.innerText = ((gLevel.mines - gGame.flagsCount) <= 9) ? `00${gLevel.mines - gGame.flagsCount}` : `0${gLevel.mines - gGame.flagsCount}`
@@ -89,7 +95,6 @@ function checkCell(location, rightClicked = false) {
         switch (gBoardContent) {
             case EMPTY:
                 gBoard[location.i][location.j].content = countNeighbors(location, gBoard, MINE)
-                gBoard[location.i][location.j].isRevealed = true
                 gGame.clearedCount++
                 // revealEmptyNeighbors(location)
                 break
@@ -103,8 +108,8 @@ function checkCell(location, rightClicked = false) {
         }
         renderCell(location, gBoard[location.i][location.j].content, true)
     }
-    console.log(`(${gGame.flagsCount} === ${gLevel.mines}):`, (gGame.flagsCount === gLevel.mines));
-    console.log(`(${gGame.clearedCount} === ${gLevel.size} ** 2 - ${gLevel.mines}):`, (gGame.clearedCount === gLevel.size ** 2 - gLevel.mines));
+    // console.log(`(${gGame.flagsCount} === ${gLevel.mines}):`, (gGame.flagsCount === gLevel.mines));
+    // console.log(`(${gGame.clearedCount} === ${gLevel.size} ** 2 - ${gLevel.mines}):`, (gGame.clearedCount === gLevel.size ** 2 - gLevel.mines));
     if ((gGame.flagsCount === gLevel.mines) &&
         (gGame.clearedCount === gLevel.size ** 2 - gLevel.mines)) endGame(true)
 }

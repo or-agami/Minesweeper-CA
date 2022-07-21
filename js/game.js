@@ -21,10 +21,6 @@ window.oncontextmenu = () => { return false }
 
 function initGame(size = 4, mines = 2, elSelectedLevel) {
     // if no level selected, beginner level is auto selected
-    // console.log('elSelectedLevel:', elSelectedLevel);
-    // console.log('typeof elSelectedLevel:', typeof elSelectedLevel);
-    console.log('typeof elSelectedLevel !== undefined:', ((typeof elSelectedLevel) !== `undefined`));
-    console.log('size:', size);
     elSelectedLevel = ((typeof elSelectedLevel) !== 'undefined') ? elSelectedLevel : document.getElementById(`size-${size}`)
     const elEmoji = document.querySelector('.emoji')
     const elMineCount = document.querySelector('.mine-count')
@@ -57,7 +53,6 @@ function levelSelect(size, mines, elButton) {
         else elLevelButton.removeAttribute('style')
     }
     initGame(size, mines, elButton)
-    // console.table(gBoard)
 }
 
 function createBoard(size) {
@@ -75,6 +70,7 @@ function createBoard(size) {
 function startGame(avoidCell) {
     gGame.isRunning = true
     fillMines(gBoard, avoidCell)
+    getRawBoard(gBoard)
     startTimer()
 }
 
@@ -85,12 +81,7 @@ function endGame(playerWon) {
     const elEmoji = document.querySelector('.emoji')
     if (playerWon) {
         elEmoji.innerText = '😁'
-        // alert('You Won')
     } else {
-        // for (let i = 0; i < mineLocations.length; i++) {
-        //     renderCell(mineLocations[i], MINE, true)
-        // }
         elEmoji.innerText = '😖'
-        // alert('Game Over')
     }
 }
