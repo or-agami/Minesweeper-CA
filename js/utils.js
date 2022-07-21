@@ -3,20 +3,31 @@
 // Board rendering
 function renderBoard(mat, selector) {
 
+    console.table(mat)
     var strHTML = ''
     for (var i = 0; i < mat.length; i++) {
 
         strHTML += '<tr>'
+
         for (var j = 0; j < mat[0].length; j++) {
 
-            const cell = mat[i][j].content
-            const contentData = mat[i][j].content
-            const className = 'cell cell-' + i + '-' + j
-            strHTML += `<td class="${className}" data-content="${contentData}" onclick="cellClicked(${i}, ${j})" oncontextmenu="cellRightClicked(${i}, ${j})">${cell}</td>`
+            const cell = mat[i][j]
+            // const cellData = `date-i="${i}" data-j="${j}"`
+            const cellData = `data-location="${i}-${j}"`
+
+            var cellContent = cell.content
+            if (cell.isFlagged) cellContent = FLAG
+
+            var className = `cell cell-${i}-${j}`
+            if (cell.isFlagged) className += ' flagged'
+            className += (cell.isRevealed) ? ' cleared' : ' hidden'
+            // className += ()
+
+            strHTML += `<td class="${className}" ${cellData} onclick="cellClicked(${i}, ${j})" oncontextmenu="cellRightClicked(${i}, ${j})">${cellContent}</td>`
         }
         strHTML += '</tr>'
     }
-    
+
     const elContainer = document.querySelector(selector)
     elContainer.innerHTML = strHTML
 }
@@ -24,19 +35,28 @@ function renderBoard(mat, selector) {
 // Cell rendering
 function renderCell(location, value, show = false) { // location such as: {i: 2, j: 7}
     // Select the elCell and set the value
-    const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
+    const elCell = document.querySelector(`[data-location="${location.i}-${location.j}"]`)
 
-    // if ((!isNaN(value) && (value)) || value === 0) {
-    //     elCell.removeAttribute('data-content')
-    //     elCell.classList.add("cleared")
-    // }
-    if (show) {
-        elCell.removeAttribute('data-content')
-        elCell.classList.add("cleared")
+    if (show || gBoard[location.i][location.j].isRevealed) elCell.classList.remove('hidden')
+
+
+    if (value === FLAG || elCell.classList.contains('flagged')) {
+        elCell.classList.toggle('flagged')
+        elCell.classList.toggle('hidden')
+    } else {
+        // elCell.classList.add('hidden')
     }
-    else elCell.dataset.content = value
     elCell.innerHTML = value
-    
+
+}
+
+// Show all mines
+function revealMines() {
+    const playerWon = false
+    for (let i = 0; i < mineLocations.length; i++) {
+        renderCell(mineLocations[i], MINE, true)
+    }
+    endGame(playerWon)
 }
 
 // Neighbors Count

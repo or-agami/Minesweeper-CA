@@ -16,8 +16,7 @@ function cellClicked(elCellI, elCellJ) {
 function cellRightClicked(elCellI, elCellJ) {
     const rClickedCellLocation = { i: elCellI, j: elCellJ }
     // console.log('rClickedCellLocation:', rClickedCellLocation);
-    if (!gGame.isRunning && !
-        gGame.isOver) startGame(rClickedCellLocation)
+    if (!gGame.isRunning && !gGame.isOver) startGame(rClickedCellLocation)
 
     checkCell(rClickedCellLocation, true)
 
@@ -33,6 +32,7 @@ function fillMines(board, skipCellLocation) {
             cellIsEmpty(randomLocation)) {
             i++
             // Model:
+            board[randomRow][randomCol].isMine = true
             board[randomRow][randomCol].content = MINE
             mineLocations.push(randomLocation)
             // DOM:
@@ -68,9 +68,11 @@ function checkCell(location, rightClicked = false) {
     let gBoardContent = gBoard[location.i][location.j].content
     if (gGame.isOver) return
     if (rightClicked) {
+        if (gBoard[location.i][location.j].isRevealed) return
         if (gBoard[location.i][location.j].isFlagged) {
             gBoard[location.i][location.j].isFlagged = false
             gGame.flagsCount--
+            // elMineCount
             // let mineInCell = (gBoardContent === MINE) ? true : false
             // renderCell(location, EMPTY, mineInCell)
             renderCell(location, EMPTY)
@@ -87,6 +89,7 @@ function checkCell(location, rightClicked = false) {
         switch (gBoardContent) {
             case EMPTY:
                 gBoard[location.i][location.j].content = countNeighbors(location, gBoard, MINE)
+                gBoard[location.i][location.j].isRevealed = true
                 gGame.clearedCount++
                 // revealEmptyNeighbors(location)
                 break

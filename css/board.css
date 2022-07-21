@@ -61,17 +61,18 @@
     background-color: #40798C;
 }
 
-[data-content] {
+.flagged {
     background-color: black;
+}
+
+.hidden {
+    /* background-color: red; */
+    background-color: black;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 /* [data-content] {
     background-color: black;
 } */
-
-[data-content="💣"] {
-    /* background-color: red; */
-    text-indent: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-}
