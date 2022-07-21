@@ -22,6 +22,7 @@ function initGame(size = 4, mines = 2, elSelectedLevel) {
     // if no level selected, beginner level is auto selected
     elSelectedLevel = (typeof elSelectedLevel !== 'undefined') ?  elSelectedLevel : document.getElementById(`size-${size}`)
     clearInterval(gGame.interval)
+    resetTimer()
     gLevel.size = size
     gLevel.mines = mines
     elSelectedLevel.style.backgroundColor = '#40798C'
@@ -62,9 +63,13 @@ function startGame(avoidCell) {
 }
 
 function endGame(playerWon) {
+    stopTimer()
     if (playerWon) {
         alert('You Won')
     } else {
-        alert('Game Over')
+        for (let i = 0; i < mineLocations.length; i++) {
+            renderCell(mineLocations[i], MINE, true)
+        }
+        // alert('Game Over')
     }
 }

@@ -3,6 +3,7 @@
 const EMPTY = ''
 const MINE = '💣'
 const FLAG = '🚩'
+var mineLocations = []
 
 function cellClicked(elCellI, elCellJ) {
     const lClickedCellLocation = { i: elCellI, j: elCellJ }
@@ -29,9 +30,10 @@ function fillMines(board, skipCellLocation) {
         if ((randomRow !== skipCellLocation.i ||
             randomCol !== skipCellLocation.j) &&
             cellIsEmpty(randomLocation)) {
-            i++
-            // Model:
-            board[randomRow][randomCol].content = MINE
+                i++
+                // Model:
+                board[randomRow][randomCol].content = MINE
+                mineLocations.push(randomLocation)
             // DOM:
             renderCell(randomLocation, MINE)
         }
@@ -60,6 +62,7 @@ function getSafeCells() {
     return safeCells
 }
 
+
 function checkCell(location, rightClicked = false) {
     let gBoardContent = gBoard[location.i][location.j].content
     if (rightClicked) {
@@ -83,8 +86,7 @@ function checkCell(location, rightClicked = false) {
                 gGame.clearedCount++
                 break
             case MINE:
-                console.log('You Dead:', MINE);
-
+                endGame(false)
                 break
             case FLAG:
                 console.log('FLAG:', FLAG);
