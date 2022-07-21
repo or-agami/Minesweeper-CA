@@ -1,7 +1,7 @@
 'use strict'
 
 // Board rendering
-function renderBoard(mat, selector) {
+function renderBoard(mat, selector = '.board') {
 
     console.table(mat)
     var strHTML = ''
@@ -12,10 +12,10 @@ function renderBoard(mat, selector) {
         for (var j = 0; j < mat[0].length; j++) {
 
             const cell = mat[i][j]
-            // const cellData = `date-i="${i}" data-j="${j}"`
             const cellData = `data-location="${i}-${j}"`
 
-            var cellContent = cell.content
+            var cellContent = (cell.content === 0) ? EMPTY : cell.content
+
             if (cell.isFlagged) cellContent = FLAG
 
             var className = `cell cell-${i}-${j}`
@@ -40,19 +40,13 @@ function renderCell(location, value, show = false, isRightClick = false) { // lo
 
     if (show || gBoard[location.i][location.j].isRevealed) elCell.classList.remove('hidden')
 
-    // if (value === EMPTY && (!gBoard[location.i][location.j].isRevealed)) {
-    //     recursionOpening(location.i, location.j, value)
-    // }
     if ((value === EMPTY) && (!isRightClick)) {
-        console.log(`location.i: ${location.i}, location.j: ${location.j}`);
+        // console.log(`location.i: ${location.i}, location.j: ${location.j}`);
         recursionOpening(location.i, location.j, value)
     }
 
     if (value === FLAG || elCell.classList.contains('flagged')) {
-        // elCell.classList.toggle('hidden')
         elCell.classList.toggle('flagged')
-    } else {
-        // elCell.classList.toggle('flagged')
     }
     elCell.innerHTML = value
 
@@ -90,18 +84,6 @@ function countNeighbors(cellLocation, board, value) {
 
 // Recursion opening
 function recursionOpening(row, col, value) {
-    console.log('hello');
-    // if (value !== EMPTY) {
-    //     console.log('recursionOpening: value:', value);
-    //     return
-    // }
-    
-
-    // if (row < 0 || row >= gBoard.length || col < 0 || col >= gBoard[0].length) {
-    //     return
-    // }
-
-    // if (gBoard[row][col].isMine) return
 
     var nextRow
     var nextCol
@@ -114,16 +96,21 @@ function recursionOpening(row, col, value) {
             if (i === row && j === col) continue;
             nextRow = i
             nextCol = j
-            console.log(`nextRow: ${nextRow}, nextCol: ${nextCol}`);
 
             // check if next location is in grid:
             if ((nextRow >= 0 && nextRow < gBoard.length) && (nextCol >= 0 && nextCol < gBoard[i].length)) {
                 if (gBoard[nextRow][nextCol].isRevealed) continue
+
                 gBoard[nextRow][nextCol].isRevealed = true
-                // console.log('hello in final if');
+                gBoard[nextRow][nextCol].isFlagged = false
+                gBoard[nextRow][nextCol].content = gRawBoard[nextRow][nextCol]
+                // gBoard[nextRow][nextCol].isRevealed = true
+
+                gGame.clearedCount++
                 // console.log('{ nextRow, nextCol }:', { i: nextRow, j: nextCol });
                 // renderCell({ i: nextRow, j: nextCol }, gRawBoard[nextRow][nextCol], true)
                 console.log('gRawBoard[nextRow][nextCol]:', gRawBoard[nextRow][nextCol]);
+
                 renderCell({ i: nextRow, j: nextCol }, gRawBoard[nextRow][nextCol], true)
             }
         }

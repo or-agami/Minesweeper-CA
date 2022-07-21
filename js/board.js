@@ -7,7 +7,6 @@ var gRawBoard, mineLocations
 
 function cellClicked(elCellI, elCellJ) {
     const lClickedCellLocation = { i: elCellI, j: elCellJ }
-    // console.log('lClickedCellLocation:', lClickedCellLocation);
     if (!gGame.isRunning && !gGame.isOver) startGame(lClickedCellLocation)
 
     checkCell(lClickedCellLocation)
@@ -15,7 +14,6 @@ function cellClicked(elCellI, elCellJ) {
 
 function cellRightClicked(elCellI, elCellJ) {
     const rClickedCellLocation = { i: elCellI, j: elCellJ }
-    // console.log('rClickedCellLocation:', rClickedCellLocation);
     if (!gGame.isRunning && !gGame.isOver) startGame(rClickedCellLocation)
 
     checkCell(rClickedCellLocation, true)
@@ -43,14 +41,11 @@ function fillMines(board, skipCellLocation) {
 
 function cellIsEmpty(location) {
     if (gBoard[location.i][location.j].content === EMPTY) {
-        console.log('cell is empty');
         return true
     }
-    console.log('cell is not empty');
     return false
 }
 
-// get board with all known location (eg. cell with 2 neighbors mines cell = 2)
 function getRawBoard(board) {
     gRawBoard = []
     for (let i = 0; i < board.length; i++) {
@@ -65,7 +60,7 @@ function getRawBoard(board) {
             }
         }
     }
-    // console.table(gRawBoard)
+    console.table(gRawBoard) // delete me
     return gRawBoard
 }
 
@@ -78,9 +73,6 @@ function checkCell(location, rightClicked = false) {
         if (gBoard[location.i][location.j].isFlagged) {
             gBoard[location.i][location.j].isFlagged = false
             gGame.flagsCount--
-            // elMineCount
-            // let mineInCell = (gBoardContent === MINE) ? true : false
-            // renderCell(location, EMPTY, mineInCell)
             renderCell(location, EMPTY, false, rightClicked)
         }
         else {
@@ -95,11 +87,10 @@ function checkCell(location, rightClicked = false) {
         switch (gBoardContent) {
             case EMPTY:
                 gBoard[location.i][location.j].content = countNeighbors(location, gBoard, MINE)
+                gBoard[location.i][location.j].isRevealed = true
                 gGame.clearedCount++
-                // revealEmptyNeighbors(location)
                 break
             case MINE:
-                // endGame(false)
                 revealMines()
                 return
             case FLAG:
