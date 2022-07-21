@@ -18,9 +18,9 @@
 
 
 
-    
+
     <div class="main-window">
-        
+
         <div class="game-settings">
             <div class="difficulty-buttons">
                 <h2>Difficulty</h2>
@@ -29,20 +29,42 @@
                 <button id="size-12" onclick="levelSelect(12, 30, this)">Expert</button>
             </div>
             <div class="mods-buttons">
-                <h2>Extra Mods </h2>
+                <h2 id="extra-mod">Extra Mods</h2>
                 <button id="manual-mode-button" onclick="clickManualModeButton()">Manual Mode</button>
                 <button id="boom-button" onclick="clickBoomButton()">7 BOOM!</button>
             </div>
         </div>
-        
+
 
         <div class="game-container">
             <table>
                 <thead>
                     <tr>
-                        <td class="board-header" colspan="8">
-                            <div class="help-container">
+                        <td class="board-header">
+                            <!-- <div class="cheats-container">
+                                <div class="safe-click-container">
+                                    <button onclick="safeClick()">Safe Click</button>
+                                </div>
+                                <div class="undo">
+                                    <button id="undo-button" onclick="clickUndoButton()">UNDO 👈</button>
+                                </div>
+                            </div> -->
+                            <div class="cheats-container">
                                 <div class="lives-count">
+                                    <p id="lives-count">💗💗💗</p>
+                                </div>
+                                <!-- <div class="safe-click-container">
+                                    <button onclick="safeClick()">Safe Click</button>
+                                </div> -->
+                                <div class="spoil-count">
+                                    <p id="spoil-count" style="cursor: pointer;" onclick="safeClick(this)">💡💡💡</p>
+                                </div>
+                                <!-- <div class="undo">
+                                    <button id="undo-button" onclick="clickUndoButton()">UNDO 👈</button>
+                                </div> -->
+                            </div>
+                            <div class="help-container">
+                                <!-- <div class="lives-count">
                                     <p id="lives-count">💗💗💗</p>
                                 </div>
                                 <div class="stat-count">
@@ -51,16 +73,12 @@
                                     <p id="timer">000</p>
                                 </div>
                                 <div class="spoil-count">
-                                    <!-- <p>spoil:</p> -->
                                     <p id="spoil-count" style="cursor: pointer;" onclick="spoilClick(this)">💡💡💡</p>
-                                </div>
-                            </div>
-                            <div class="cheats-container">
-                                <div class="safe-click-container">
-                                    <button onclick="safeClick()">Safe Click</button>
-                                </div>
-                                <div class="undo">
-                                    <button id="undo-button" onclick="clickUndoButton()">UNDO 👈</button>
+                                </div> -->
+                                <div class="stat-count">
+                                    <p class="mine-count">000</p>
+                                    <p class="emoji" style="cursor: pointer;" onclick="initGame()">🙂</p>
+                                    <p id="timer">000</p>
                                 </div>
                             </div>
                         </td>

@@ -7,7 +7,7 @@ var gBoard
 var gLevel = {
     size: 0,
     mines: 0,
-};
+}
 var gGame = {
     isRunning: false,
     isOver: false,
@@ -16,15 +16,17 @@ var gGame = {
     flagsCount: 0,
     interval: 0,
     livesCount: 3,
-    spoilCount: 3,
-};
+}
 
 window.oncontextmenu = () => { return false }
 
 function initGame(size = 4, mines = 2, elSelectedLevel) {
     // if no level selected, beginner level is auto selected
     elSelectedLevel = ((typeof elSelectedLevel) !== 'undefined') ? elSelectedLevel : document.getElementById(`size-${size}`)
-    
+
+    const elBoardHeader = document.querySelector('.board-header')
+    elBoardHeader.setAttribute('colspan', `${size}`)
+
     const elEmoji = document.querySelector('.emoji')
     elEmoji.innerText = `🙂`
 
@@ -43,6 +45,9 @@ function initGame(size = 4, mines = 2, elSelectedLevel) {
     mineLocations = []
     gGame = {
         isRunning: false, isOver: false, shownCount: 0, clearedCount: 0, flagsCount: 0, interval: 0, livesCount: 3, spoilCount: 3,
+    }
+    gCheats = {
+        spoilers: 3, hints: 3
     }
 
     gBoard = createBoard(size)
@@ -92,7 +97,7 @@ function checkGameOver(clickedOnMine = false) {
     if (clickedOnMine) {
         console.log('gGame.livesCount:', gGame.livesCount);
         gGame.livesCount--
-        var currLives = ''
+        let currLives = ''
         for (let i = 0; i < gGame.livesCount; i++) {
             currLives += LIFE
         }

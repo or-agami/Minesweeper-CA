@@ -16,6 +16,10 @@ body {
     border-radius: 10px;
 }
 
+h2, .high-scores * {
+    color: #09191f;
+}
+
 button {
     /* max-height: 40px; */
     background-color: #70A9A1;

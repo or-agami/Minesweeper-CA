@@ -13,16 +13,16 @@ function renderBoard(mat, selector = '.board') {
 
             const cell = mat[i][j]
             const cellData = `data-location="${i}-${j}"`
-
+            
             var cellContent = (cell.content === 0) ? EMPTY : cell.content
-
+            
             if (cell.isFlagged) cellContent = FLAG
-
+            
             var className = `cell cell-${i}-${j}`
             if (cell.isFlagged) className += ' flagged'
             className += (cell.isRevealed) ? ' cleared' : ' hidden'
             // className += (cell.)
-
+            
             strHTML += `<td class="${className}" ${cellData} onclick="cellClicked(${i}, ${j})" oncontextmenu="cellRightClicked(${i}, ${j})">${cellContent}</td>`
         }
         strHTML += '</tr>'
