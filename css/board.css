@@ -20,7 +20,8 @@
 .high-scores {
     width: 220px;
     margin: 13px;
-    background-color: #F6F1D1;
+    /* background-color: #F6F1D1; */
+    background-color: #70A9A1;
     padding: 0 20px;
     border-radius: 20px;
 }
@@ -57,7 +58,8 @@
 .cheats-container {
     display: flex;
     width: 100%;
-    background-color: #40798C;
+    /* background-color: #40798C; */
+    background-color: #70A9A1;
 }
 
 .stat-count,
@@ -77,26 +79,28 @@
 
 .cell-cleared {
     background-color: #40798C;
+    /* background-color: #70A9A1; */
 }
 
 
 .hidden {
-    background-color: red;
-    background-color: black;
+    /* background-color: black; */
+    background-color: #0B2027;
     text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
 }
 
 .flagged {
-    background-color: black;
+    /* background-color: black; */
+    background-color: #0B2027;
     text-indent: initial;
     white-space: initial;
     overflow: initial;
 }
 
 .hinted {
-    background-color: aqua;
+    background-color: #F6F1D1;
     transition: 100ms;
 }
 

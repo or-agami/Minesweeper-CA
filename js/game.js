@@ -41,7 +41,7 @@ function initGame(size = 4, mines = 2, elSelectedLevel) {
     resetTimer()
     gLevel.size = size
     gLevel.mines = mines
-    elSelectedLevel.style.backgroundColor = '#40798C'
+    elSelectedLevel.style.backgroundColor = '#0B2027'
     mineLocations = []
     gGame = {
         isRunning: false, isOver: false, shownCount: 0, clearedCount: 0, flagsCount: 0, interval: 0, livesCount: 3, spoilCount: 3,

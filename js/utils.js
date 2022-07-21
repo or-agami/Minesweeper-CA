@@ -38,7 +38,10 @@ function renderCell(location, value, show = false, isRightClick = false) { // lo
     const elCell = document.querySelector(`[data-location="${location.i}-${location.j}"]`)
     if (value === 0) value = EMPTY
 
-    if (show || gBoard[location.i][location.j].isRevealed) elCell.classList.remove('hidden')
+    if (show || gBoard[location.i][location.j].isRevealed) {
+        elCell.classList.remove('hidden')
+        elCell.classList.add('cell-cleared')
+    }
 
     if ((value === EMPTY) && (!isRightClick)) {
         // console.log(`location.i: ${location.i}, location.j: ${location.j}`);
