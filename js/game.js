@@ -95,13 +95,11 @@ function checkGameOver(clickedOnMine = false) {
     }
     if (gGame.livesCount <= 1) revealMines()
     if (clickedOnMine) {
-        console.log('gGame.livesCount:', gGame.livesCount);
         gGame.livesCount--
         let currLives = ''
         for (let i = 0; i < gGame.livesCount; i++) {
             currLives += LIFE
         }
-        console.log('currLives:', currLives);
         elLivesCount.innerText = currLives
     }
 }

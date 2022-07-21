@@ -44,7 +44,6 @@ function renderCell(location, value, show = false, isRightClick = false) { // lo
     }
 
     if ((value === EMPTY) && (!isRightClick)) {
-        // console.log(`location.i: ${location.i}, location.j: ${location.j}`);
         recursionOpening(location.i, location.j, value)
     }
 
@@ -81,7 +80,6 @@ function countNeighbors(cellLocation, board, value) {
             }
         }
     }
-    // console.log('neighborsCount:', neighborsCount);
     return neighborsCount;
 }
 
@@ -110,9 +108,6 @@ function recursionOpening(row, col, value) {
                 // gBoard[nextRow][nextCol].isRevealed = true
 
                 gGame.clearedCount++
-                // console.log('{ nextRow, nextCol }:', { i: nextRow, j: nextCol });
-                // renderCell({ i: nextRow, j: nextCol }, gRawBoard[nextRow][nextCol], true)
-                console.log('gRawBoard[nextRow][nextCol]:', gRawBoard[nextRow][nextCol]);
 
                 renderCell({ i: nextRow, j: nextCol }, gRawBoard[nextRow][nextCol], true)
             }

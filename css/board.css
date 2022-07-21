@@ -54,7 +54,6 @@
 .cheats-container {
     display: flex;
     width: 100%;
-    /* background-color: #40798C; */
     background-color: #70A9A1;
 }
 
@@ -75,12 +74,10 @@
 
 .cell-cleared {
     background-color: #40798C;
-    /* background-color: #70A9A1; */
 }
 
 
 .hidden {
-    /* background-color: black; */
     background-color: #0B2027;
     text-indent: 100%;
     white-space: nowrap;
@@ -88,7 +85,6 @@
 }
 
 .flagged {
-    /* background-color: black; */
     background-color: #0B2027;
     text-indent: initial;
     white-space: initial;

@@ -73,7 +73,6 @@ function getRawBoard(board) {
             }
         }
     }
-    console.table(gRawBoard) // delete me
     return gRawBoard
 }
 
