@@ -1,5 +1,7 @@
 'use strict'
 
+const LIFE = '💗'
+const HINT = '💡'
 
 var gBoard
 var gLevel = {
@@ -22,12 +24,18 @@ window.oncontextmenu = () => { return false }
 function initGame(size = 4, mines = 2, elSelectedLevel) {
     // if no level selected, beginner level is auto selected
     elSelectedLevel = ((typeof elSelectedLevel) !== 'undefined') ? elSelectedLevel : document.getElementById(`size-${size}`)
+    
     const elEmoji = document.querySelector('.emoji')
+    elEmoji.innerText = `🙂`
+
     const elMineCount = document.querySelector('.mine-count')
     elMineCount.innerText = (mines <= 9) ? `00${mines}` : `0${mines}`
-    elEmoji.innerText = `🙂`
+
+    const elLivesCount = document.getElementById('lives-count')
+    elLivesCount.innerText = `${LIFE}${LIFE}${LIFE}`
+
     clearInterval(gGame.interval)
-    
+
     resetTimer()
     gLevel.size = size
     gLevel.mines = mines
@@ -74,14 +82,33 @@ function startGame(avoidCell) {
     startTimer()
 }
 
+function checkGameOver(clickedOnMine = false) {
+    const elLivesCount = document.getElementById('lives-count')
+    if ((gGame.flagsCount === gLevel.mines) &&
+        (gGame.clearedCount === gLevel.size ** 2 - gLevel.mines)) {
+        endGame(true)
+    }
+    if (gGame.livesCount <= 1) revealMines()
+    if (clickedOnMine) {
+        console.log('gGame.livesCount:', gGame.livesCount);
+        gGame.livesCount--
+        var currLives = ''
+        for (let i = 0; i < gGame.livesCount; i++) {
+            currLives += LIFE
+        }
+        console.log('currLives:', currLives);
+        elLivesCount.innerText = currLives
+    }
+}
+
 function endGame(playerWon) {
     stopTimer()
     gGame.isRunning = false
     gGame.isOver = true
     const elEmoji = document.querySelector('.emoji')
     if (playerWon) {
-        elEmoji.innerText = '😁'
+        elEmoji.innerText = '😎'
     } else {
-        elEmoji.innerText = '😖'
+        elEmoji.innerText = '🤯'
     }
 }

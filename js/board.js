@@ -46,6 +46,19 @@ function cellIsEmpty(location) {
     return false
 }
 
+function getEmptyCellsLocation() {    
+    const emptyCellsLocation = []
+
+    for (let i = 0; i < gRawBoard.length; i++) {
+        for (let j = 0; j < gRawBoard[i].length; j++) {
+            if ((gRawBoard[i][j] !== MINE) && (!gBoard[i][j].isRevealed)) {
+                emptyCellsLocation.push({ i, j })
+            }
+        }
+    }
+    return emptyCellsLocation
+}
+
 function getRawBoard(board) {
     gRawBoard = []
     for (let i = 0; i < board.length; i++) {
@@ -91,16 +104,10 @@ function checkCell(location, rightClicked = false) {
                 gGame.clearedCount++
                 break
             case MINE:
-                revealMines()
+                checkGameOver(gBoardContent === MINE)
                 return
-            case FLAG:
-                console.log('FLAG:', FLAG);
-                break
         }
         renderCell(location, gBoard[location.i][location.j].content, true)
     }
-    // console.log(`(${gGame.flagsCount} === ${gLevel.mines}):`, (gGame.flagsCount === gLevel.mines));
-    // console.log(`(${gGame.clearedCount} === ${gLevel.size} ** 2 - ${gLevel.mines}):`, (gGame.clearedCount === gLevel.size ** 2 - gLevel.mines));
-    if ((gGame.flagsCount === gLevel.mines) &&
-        (gGame.clearedCount === gLevel.size ** 2 - gLevel.mines)) endGame(true)
+    checkGameOver()
 }
