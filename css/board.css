@@ -4,28 +4,43 @@
     margin: 5px auto;
 }
 
-.game-settings,
+/* due to unfinished score feature: */
+/* .game-settings,
 .game-container,
 .high-scores {
     vertical-align: top;
     display: inline-block;
-}
+} */
 
 .game-settings {
+    display: flex;
     text-align: center;
     height: fit-content;
-}
-
-.game-settings,
-.high-scores {
-    width: 220px;
-    margin: 13px;
-    /* background-color: #F6F1D1; */
+    width: fit-content;
+    justify-content: center;
+    margin: 13px auto;
     background-color: #70A9A1;
     padding: 0 20px;
     border-radius: 20px;
 }
 
+.game-settings div {
+    margin: 0 20px;
+}
+
+/* due to unfinished score feature: */
+/* .game-settings,
+.high-scores {
+    width: 400px;
+    margin: 13px;
+    background-color: #70A9A1;
+    padding: 0 20px;
+    border-radius: 20px;
+} */
+
+.game-container table {
+    margin: 0 auto;
+}
 
 .game-container .board td {
     width: 50px;
@@ -34,25 +49,6 @@
     border: 2px solid white;
     cursor: default;
 }
-
-/* .help-container,
-.cheats-container {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    background-color: #40798C;
-}
-
-.lives-count,
-.stat-count,
-.spoil-count,
-.safe-click-container,
-.undo {
-    display: inline-block;
-    width: fit-content;
-    margin: 0 auto;
-    align-items: center;
-} */
 
 .help-container,
 .cheats-container {
@@ -104,6 +100,7 @@
     transition: 100ms;
 }
 
-/* [data-content] {
-    background-color: black;
-} */
+/* due to unfinished score feature: */
+.high-scores {
+    display: none;
+}

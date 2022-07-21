@@ -1,19 +1,34 @@
 @media (max-width: 790px) {
 
-    .game-settings,
+    /* due to unfinished scored feature */
+    /* .game-settings,
     .game-container,
     .high-scores {
+        width: auto;
         display: block;
         height: fit-content;
+        justify-content: space-between;
+    } */
+
+    .game-settings,
+    .game-container {
+        width: auto;
+        display: block;
+        height: fit-content;
+        justify-content: space-between;
+    }
+    .game-settings {
+        display: flex;
     }
 
     .game-settings .difficulty-buttons,
     .game-settings .mods-buttons {
         display: inline-block;
-        margin: 10px auto;
+        margin: 2px auto;
     }
 
-    .game-settings button {
-        margin: 20px auto;
+    .game-settings button, .game-settings h2 {
+        /* font-size: smaller; */
+        margin: 10px auto;
     }
 }
