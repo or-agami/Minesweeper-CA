@@ -93,7 +93,6 @@ function checkGameOver(clickedOnMine = false) {
         (gGame.clearedCount === gLevel.size ** 2 - gLevel.mines)) {
         endGame(true)
     }
-    if (gGame.livesCount <= 1) revealMines()
     if (clickedOnMine) {
         gGame.livesCount--
         let currLives = ''
@@ -101,6 +100,7 @@ function checkGameOver(clickedOnMine = false) {
             currLives += LIFE
         }
         elLivesCount.innerText = currLives
+        if (gGame.livesCount < 1) revealMines()
     }
 }
 

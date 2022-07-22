@@ -59,7 +59,8 @@
 
 .stat-count,
 .lives-count,
-.spoil-count {
+.spoil-count,
+.hint-count {
     display: inline-block;
     width: fit-content;
     margin: 0 auto;
@@ -99,4 +100,9 @@
 /* due to unfinished score feature: */
 .high-scores {
     display: none;
+}
+
+#in-development {
+    background-color: grey;
+    cursor: not-allowed;
 }

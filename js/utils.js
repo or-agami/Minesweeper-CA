@@ -20,7 +20,7 @@ function renderBoard(mat, selector = '.board') {
             
             var className = `cell cell-${i}-${j}`
             if (cell.isFlagged) className += ' flagged'
-            className += (cell.isRevealed) ? ' cleared' : ' hidden'
+            className += (cell.isRevealed) ? ' cell-cleared' : ' hidden'
             // className += (cell.)
             
             strHTML += `<td class="${className}" ${cellData} onclick="cellClicked(${i}, ${j})" oncontextmenu="cellRightClicked(${i}, ${j})">${cellContent}</td>`

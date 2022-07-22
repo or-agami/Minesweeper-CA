@@ -30,8 +30,10 @@
             </div>
             <div class="mods-buttons">
                 <h2 id="extra-mod">Extra Mods</h2>
-                <button id="manual-mode-button" onclick="clickManualModeButton()">Manual Mode</button>
-                <button id="boom-button" onclick="clickBoomButton()">7 BOOM!</button>
+                <!-- <button id="manual-mode-button" onclick="clickManualModeButton()">Manual Mode</button>
+                <button id="boom-button" onclick="clickBoomButton()">7 BOOM!</button> -->
+                <button id="in-development" onclick="alert('In development')">Manual Mode</button>
+                <button id="in-development" onclick="alert('In development')">7 BOOM!</button>
             </div>
         </div>
 
@@ -46,7 +48,10 @@
                                     <p id="lives-count">💗💗💗</p>
                                 </div>
                                 <div class="spoil-count">
-                                    <p id="spoil-count" style="cursor: pointer;" onclick="safeClick(this)">💡💡💡</p>
+                                    <p id="spoil-count" style="cursor: pointer;" onclick="spoilClick(this)">❔❔❔</p>
+                                </div>
+                                <div class="hint-count">
+                                    <p id="hints-count" style="cursor: pointer;" onclick="safeClick(this)">💡💡💡</p>
                                 </div>
                             </div>
                             <div class="help-container">
