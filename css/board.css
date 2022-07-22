@@ -50,6 +50,7 @@
     text-align: center;
     border: 2px solid white;
     cursor: default;
+    font-weight: bold;
 }
 
 .help-container,
@@ -77,7 +78,8 @@
 }
 
 .cell-cleared, .cell-flashed {
-    background-color: #52796F;
+    /* background-color: #52796F; */
+    background-color: white;
 }
 
 
@@ -108,6 +110,39 @@
     50% {
         opacity: 0;
     }
+}
+
+[data-content="1"] {
+    color: #58aeca;
+    font-size: x-large;
+}
+[data-content="2"] {
+    color: #60c270;
+    font-size: x-large;
+}
+[data-content="3"] {
+    color: #9e6dcc;
+    font-size: x-large;
+}
+[data-content="4"] {
+    color: #ff7eea;
+    font-size: x-large;
+}
+[data-content="5"] {
+    color: #fd4444;
+    font-size: x-large;
+}
+[data-content="6"] {
+    color: #a30000;
+    font-size: x-large;
+}
+[data-content="7"] {
+    color: #7e0000;
+    font-size: x-large;
+}
+[data-content="8"] {
+    color: #000000;
+    font-size: x-large;
 }
 
 /* due to unfinished score feature: */

@@ -40,7 +40,7 @@ function safeClick(elHintsCount) {
 }
 
 // Player clicked on spoiler (flash 9 cells for a sec around clicked cell)
-function spoilClick(elSpoilCount) {
+function spoilClick(elSpoilsCount) {
 
     // Return if game is not running
     if (!gGame.isRunning) return
@@ -55,11 +55,11 @@ function spoilClick(elSpoilCount) {
         gGame.inSpoilMod = true
 
         // Set strobing to spoil count element until cell is clicked
-        elSpoilCount.classList.add('spoiled')
+        elSpoilsCount.classList.add('spoiled')
         gCheats.spoilers--
     } else {
         gGame.inSpoilMod = false
-        elSpoilCount.classList.remove('spoiled')
+        elSpoilsCount.classList.remove('spoiled')
         gCheats.spoilers++
     }
 }
@@ -67,9 +67,9 @@ function spoilClick(elSpoilCount) {
 // Flash 9 cells
 function spoilCells(location) {
     var elCellToFlash
-    const elSpoilCount = document.getElementById('spoil-count')
+    const elSpoilsCount = document.getElementById('spoils-count')
     // Remove strobing to spoil count element
-    elSpoilCount.classList.remove('spoiled')
+    elSpoilsCount.classList.remove('spoiled')
 
     // Select cell and all his neighbors:
     for (let i = location.i - 1; i <= location.i + 1; i++) {
@@ -101,6 +101,6 @@ function spoilCells(location) {
         for (let i = 0; i < gCheats.spoilers; i++) {
             currSpoilers += SPOILER
         }
-        elSpoilCount.innerText = currSpoilers
+        elSpoilsCount.innerText = currSpoilers
     }
 }

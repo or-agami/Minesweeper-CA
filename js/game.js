@@ -38,9 +38,13 @@ function initGame(size = 4, mines = 2, elSelectedLevel) {
     const elMineCount = document.querySelector('.mine-count')
     elMineCount.innerText = (mines <= 9) ? `00${mines}` : `0${mines}`
 
-    // Init DOM lives count
+    // Init DOM lives ,hints, spoils count
     const elLivesCount = document.getElementById('lives-count')
+    const elHintsCount = document.getElementById('hints-count')
+    const elSpoilsCount = document.getElementById('spoils-count')
     elLivesCount.innerText = `${LIFE}${LIFE}${LIFE}`
+    elHintsCount.innerText = `${HINT}${HINT}${HINT}`
+    elSpoilsCount.innerText = `${SPOILER}${SPOILER}${SPOILER}`
 
     // Init variables:
     resetTimer()

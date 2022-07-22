@@ -59,6 +59,7 @@ function renderCell(location, value, show = false, isRightClick = false) { // lo
     }
 
     // Update DOM with his content
+    elCell.setAttribute('data-content', `${value}`)
     elCell.innerHTML = value
 }
 
