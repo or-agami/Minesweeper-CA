@@ -42,9 +42,11 @@
     margin: 0 auto;
 }
 
+
+
 .game-container .board td {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     text-align: center;
     border: 2px solid white;
     cursor: default;
@@ -68,12 +70,13 @@
 }
 
 .stat-count p {
+    font-size: large;
     display: inline-block;
     margin: 0 8px;
     margin-bottom: 20px;
 }
 
-.cell-cleared {
+.cell-cleared, .cell-flashed {
     background-color: #40798C;
 }
 
@@ -95,6 +98,16 @@
 .hinted {
     background-color: #F6F1D1;
     transition: 100ms;
+}
+
+.spoiled {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
 }
 
 /* due to unfinished score feature: */
