@@ -46,7 +46,7 @@ function initGame(size = 4, mines = 2, elSelectedLevel) {
     resetTimer()
     gLevel.size = size
     gLevel.mines = mines
-    elSelectedLevel.style.backgroundColor = '#0B2027'
+    elSelectedLevel.style.backgroundColor = '#2F3E46'
     mineLocations = []
     gGame = {
         isRunning: false, isOver: false, inSpoilMod: false, clearedCount: 0, flagsCount: 0, livesCount: 3,
@@ -76,7 +76,7 @@ function levelSelect(size, mines, elButton) {
     for (let i = 0; i < elButtons.length; i++) {
         const elLevelButton = elButtons[i];
         if (elButton === elLevelButton) {
-            elButton.style.backgroundColor = '#40798C'
+            elButton.style.backgroundColor = '#52796F'
         }
         else elLevelButton.removeAttribute('style')
     }
@@ -139,10 +139,10 @@ function checkGameOver(clickedOnMine = false) {
         if (gGame.livesCount < 1) revealMines()
 
         else {
-            // Update emoji for a 500 ms to soprised imoji
+            // Update emoji for a 600 ms to soprised imoji
             const elImoji = document.querySelector('.emoji')
             elImoji.innerText = '😮'
-            setTimeout(() => { elImoji.innerText = '🙂' }, 500)
+            setTimeout(() => { elImoji.innerText = '🙂' }, 600)
         }
     }
 }

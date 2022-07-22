@@ -53,7 +53,7 @@ function renderCell(location, value, show = false, isRightClick = false) { // lo
         recursionOpening(location.i, location.j, value)
     }
 
-    // If cell is flag update DOM
+    // If cell is flagged update DOM
     if (value === FLAG || elCell.classList.contains('flagged')) {
         elCell.classList.toggle('flagged')
     }

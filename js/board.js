@@ -135,7 +135,8 @@ function checkCell(location, rightClicked = false) {
             gGame.flagsCount--
 
             // DOM:
-            renderCell(location, EMPTY, false, rightClicked)
+            if (gBoard[location.i][location.j].isMine) renderCell(location, MINE, false, rightClicked)
+            else renderCell(location, EMPTY, false, rightClicked)
         } else {
 
             // Model:

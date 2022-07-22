@@ -1,5 +1,5 @@
 var gCheats = {
-    spoliers: 3,
+    spoilers: 3,
     hints: 3,
 }
 
@@ -46,7 +46,7 @@ function spoilClick(elSpoilCount) {
     if (!gGame.isRunning) return
 
     // Return and Alert user if he ran out of spoilers
-    if (gCheats.spoliers === 0) return alert(`There's no more spoilers for you`)
+    if (gCheats.spoilers === 0) return alert(`There's no more spoilers for you`)
 
     // Set or Unset spoil mode (so player can regret pre cell select)
     if (!gGame.inSpoilMod) {
@@ -56,11 +56,11 @@ function spoilClick(elSpoilCount) {
 
         // Set strobing to spoil count element until cell is clicked
         elSpoilCount.classList.add('spoiled')
-        gCheats.spoliers--
+        gCheats.spoilers--
     } else {
         gGame.inSpoilMod = false
         elSpoilCount.classList.remove('spoiled')
-        gCheats.spoliers++
+        gCheats.spoilers++
     }
 }
 
@@ -97,12 +97,10 @@ function spoilCells(location) {
     // Update DOM spoil count and turn off spoil mode
     if (gGame.inSpoilMod) {
         gGame.inSpoilMod = false
-        for (let i = 0; i < gCheats.spoliers; i++) {
-            let currSpoilers = ''
-            for (let i = 0; i < gGame.livesCount; i++) {
-                currSpoilers += SPOILER
-            }
-            elSpoilCount.innerText = currSpoilers
+        let currSpoilers = ''
+        for (let i = 0; i < gCheats.spoilers; i++) {
+            currSpoilers += SPOILER
         }
+        elSpoilCount.innerText = currSpoilers
     }
 }

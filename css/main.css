@@ -3,7 +3,7 @@
 }
 
 body {
-    background-color: #F6F1D1;
+    background-color: #CAD2C5;
 }
 
 .header {
@@ -11,13 +11,13 @@ body {
     text-align: center;
     width: fit-content;
     padding: 15px;
-    background-color: #70A9A1;
+    background-color: #354F52;
     font-size: 40px;
     border-radius: 10px;
 }
 
 button {
-    background-color: #40798C;
+    background-color: #52796F;
     border: none;
     padding: 3px 5px;
     font-size: medium;
