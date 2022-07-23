@@ -9,33 +9,41 @@
     <link rel="icon" href="assets/icon/Minesweepr-Icon.png" type="image/icon type">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/board.css">
-    <link rel="stylesheet" href="css/mobile.css">
 </head>
 
 <body onload="initGame()">
 
     <h1 class="header">💥Minesweeper💥</h1>
 
-
+<div class="stats-window">
+    
+    <div class="game-settings">
+        <div class="difficulty-buttons">
+            <h2>Difficulty</h2>
+            <button id="size-4" onclick="levelSelect(4, 2, this)">Beginner</button>
+            <button id="size-8" onclick="levelSelect(8, 12, this)">Medium</button>
+            <button id="size-12" onclick="levelSelect(12, 30, this)">Expert</button>
+        </div>
+        <div class="mods-buttons">
+            <h2 id="extra-mod">Extra Mods</h2>
+            <!-- <button id="manual-mode-button" onclick="clickManualModeButton()">Manual Mode</button>
+            <button id="boom-button" onclick="clickBoomButton()">7 BOOM!</button> -->
+            <button id="in-development" onclick="alert('In development')">7 BOOM!</button>
+            <button id="manual-mode-button" onclick="clickManualModeButton()">Manual Mode</button>
+            <button id="undo-button" onclick="undoStep()">Undo</button>
+        </div>
+    </div>
+    <div class="high-scores">
+        <h2>Best Scores:</h2>
+        <h3>Beginner: &nbsp; <span id="beginner"></span></h3>
+        <h3>Medium: &nbsp; <span id="medium"></span></h3>
+        <h3>Expert: &nbsp; <span id="expert"></span></h3>
+    </div>
+</div>
 
 
     <div class="main-window">
 
-        <div class="game-settings">
-            <div class="difficulty-buttons">
-                <h2>Difficulty</h2>
-                <button id="size-4" onclick="levelSelect(4, 2, this)">Beginner</button>
-                <button id="size-8" onclick="levelSelect(8, 12, this)">Medium</button>
-                <button id="size-12" onclick="levelSelect(12, 30, this)">Expert</button>
-            </div>
-            <div class="mods-buttons">
-                <h2 id="extra-mod">Extra Mods</h2>
-                <!-- <button id="manual-mode-button" onclick="clickManualModeButton()">Manual Mode</button>
-                <button id="boom-button" onclick="clickBoomButton()">7 BOOM!</button> -->
-                <button id="in-development" onclick="alert('In development')">Manual Mode</button>
-                <button id="in-development" onclick="alert('In development')">7 BOOM!</button>
-            </div>
-        </div>
 
 
         <div class="game-container">
@@ -69,12 +77,12 @@
             </table>
         </div>
 
-        <div class="high-scores">
+        <!-- <div class="high-scores">
             <h2>High Scores:</h2>
             <h3>Beginner: <span id="beginner-score"></span></h3>
             <h3>Medium: <span id="medium-score"></span></h3>
             <h3>Expert: <span id="expert-score"></span></h3>
-        </div>
+        </div> -->
     </div>
     </div>
 

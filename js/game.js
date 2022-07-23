@@ -1,11 +1,56 @@
 'use strict'
 
+// localStorage.setItem('beginner', '');
+// localStorage.setItem('medium', '');
+// localStorage.setItem('expert', '');
+// var bestBeginnerScore
+// var bestMediumScore
+// var bestExpertScore
+// var localStorData = [
+//     { elBeginnerScore: document.getElementById('beginner-score'), beginnerScoreData: localStorage.getItem('beginner') },
+//     { elMediumScore: document.getElementById('medium-score'), mediumScoreData: localStorage.getItem('medium') },
+//     { elExpertScore: document.getElementById('expert-score'), expertScoreData: localStorage.getItem('expert') },
+// ]
+// var localStorData = {
+//     levelElement: {
+//         beginner: document.getElementById('beginner'),
+//         medium: document.getElementById('medium'),
+//         expert: document.getElementById('expert'),
+//     },
+//     getScore: {
+//         beginner: localStorage.getItem('beginner'),
+//         medium: localStorage.getItem('medium'),
+//         expert: localStorage.getItem('expert'),
+//     },
+// }
+var levelNames = ['beginner', 'medium', 'expert']
+// var localStorData = {
+//     beginner: {
+//         levelInnerText: document.getElementById('beginner').innerText,
+//         getScore: localStorage.getItem('beginner'),
+//         setScore: localStorage.setItem('beginner'),
+//     },
+//     medium: {
+//         levelInnerText: document.getElementById('medium').innerText,
+//         getScore: localStorage.getItem('medium'),
+//         setScore: localStorage.setItem('medium'),
+//     },
+//     expert: {
+//         levelInnerText: getElementById('expert').innerText,
+//         getScore: localStorage.getItem('expert'),
+//         setScore: localStorage.setItem('expert'),
+//     },
+// }
+
+
+
 const LIFE = '❤️'
 const HINT = '❔'
 const SPOILER = '💡'
 
 var gBoard, gGame
 var gLevel = {
+    levelName: '',
     size: 0,
     mines: 0,
 }
@@ -46,10 +91,18 @@ function initGame(size = 4, mines = 2, elSelectedLevel) {
     elHintsCount.innerText = `${HINT}${HINT}${HINT}`
     elSpoilsCount.innerText = `${SPOILER}${SPOILER}${SPOILER}`
 
+    // Init High Scores count
+    for (let i = 0; i < levelNames.length; i++) {
+        const levelName = levelNames[i];
+        let elLevel = document.getElementById(levelName)
+        elLevel.innerText = localStorage.getItem(levelName)
+    }
+
     // Init variables:
     resetTimer()
     gLevel.size = size
     gLevel.mines = mines
+    gLevel.levelName = (elSelectedLevel.innerText).toLowerCase()
     elSelectedLevel.style.backgroundColor = '#2F3E46'
     mineLocations = []
     gGame = {
@@ -165,7 +218,47 @@ function endGame(playerWon) {
     const elEmoji = document.querySelector('.emoji')
     if (playerWon) {
         elEmoji.innerText = '😎'
+
+        const elTimer = document.getElementById('timer')
+        const timeToWin = elTimer.innerText
+        console.log('timeToWin:', timeToWin);
+        updateScore(timeToWin)
+
     } else {
         elEmoji.innerText = '🤯'
     }
+
+    // Update best score
+    // const elBeginnerScore = document.getElementById('beginner-score')
+    // const elMediumScore = document.getElementById('medium-score')
+    // const elExpertScore = document.getElementById('expert-score')
+    // elBeginnerScore.innerText = localStorage.getItem('beginner')
+    // elMediumScore.innerText = localStorage.getItem('medium')
+    // elExpertScore.innerText = localStorage.getItem('expert')
+}
+
+// Update best score
+function updateScore(time) {
+    var score = +time
+    const levelName = gLevel.levelName
+    const levelScore = localStorage.getItem(levelName)
+
+    // Check if it's the first play in this level
+    if (levelScore !== null) {
+
+        // If it's not check if it's best score
+        if (score < levelScore) {
+            localStorage.setItem(levelName, score);
+            console.log('score is smaller:', score);
+        }
+    } else localStorage.setItem(levelName, score)
+
+    const timeInStr = ` ${localStorage.getItem(levelName)} Sec`
+
+
+    console.log('score:', score);
+    console.log('levelScore:', levelScore);
+
+    let elLevel = document.getElementById(levelName)
+    elLevel.innerText = timeInStr
 }
