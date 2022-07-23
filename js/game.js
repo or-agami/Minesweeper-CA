@@ -1,6 +1,6 @@
 'use strict'
 
-const LIFE = '💗'
+const LIFE = '❤️'
 const HINT = '❔'
 const SPOILER = '💡'
 

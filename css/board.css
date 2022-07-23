@@ -77,6 +77,10 @@
     margin-bottom: 20px;
 }
 
+.stat-count .emoji {
+    font-size: x-large;
+}
+
 .cell-cleared, .cell-flashed {
     /* background-color: #52796F; */
     background-color: white;
