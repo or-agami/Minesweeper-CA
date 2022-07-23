@@ -23,7 +23,6 @@
     padding-top: 10px;
 }
 
-/* due to unfinished score feature: */
 .game-settings,
 .high-scores {
     text-align: center;
@@ -84,7 +83,6 @@
 
 .cell-cleared,
 .cell-flashed {
-    /* background-color: #52796F; */
     background-color: white;
     transition: 400ms;
 }
@@ -105,9 +103,7 @@
 }
 
 .hinted {
-    /* background-color: #CAD2C5; */
     animation: blinker 250ms linear infinite;
-    /* transition: 1100ms; */
 }
 
 .spoiled {
@@ -159,11 +155,6 @@
     color: #000000;
     font-size: x-large;
 }
-
-/* due to unfinished score feature: */
-/* .high-scores {
-    display: none;
-} */
 
 #in-development {
     background-color: grey;

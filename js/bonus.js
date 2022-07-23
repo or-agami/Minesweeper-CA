@@ -104,3 +104,15 @@ function spoilCells(location) {
         elSpoilsCount.innerText = currSpoilers
     }
 }
+
+// Undo last step !!! Life is not included on purpose !!!
+function undoStep() {
+    
+    // Return if game is not running
+    if (!gGame.isRunning) return
+
+    // Return alert if pleyer is in the first step
+    if (boardsSaver.length === 0) return alert('You have got to the first step')
+
+    renderBoard(boardsSaver.pop())
+}

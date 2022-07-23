@@ -123,6 +123,8 @@ function checkCell(location, rightClicked = false) {
     // Check if spoil mod is on
     if (gGame.inSpoilMod && !rightClicked) return spoilCells(location)
 
+    // Add current state for the undo function
+    boardsSaver.push(structuredClone(gBoard))
 
     // If player right clicked a cell:
     if (rightClicked) {

@@ -25,7 +25,7 @@ function renderBoard(mat, selector = '.board') {
             if (cell.isFlagged) className += ' flagged'
             className += (cell.isRevealed) ? ' cell-cleared' : ' hidden'
 
-            strHTML += `<td class="${className}" ${cellData} onclick="cellClicked(${i}, ${j})" oncontextmenu="cellRightClicked(${i}, ${j})">${cellContent}</td>`
+            strHTML += `<td class="${className}" ${cellData} onclick="cellClicked(${i}, ${j})" oncontextmenu="cellRightClicked(${i}, ${j})" data-content="${cellContent}">${cellContent}</td>`
         }
         strHTML += '</tr>'
     }
@@ -50,7 +50,7 @@ function renderCell(location, value, show = false, isRightClick = false) { // lo
 
     // If cell empty open his empty neighbors (in recursion)
     if ((value === EMPTY) && (!isRightClick)) {
-        recursionOpening(location.i, location.j, value)
+        recursionOpening(location.i, location.j)
     }
 
     // If cell is flagged update DOM
@@ -93,7 +93,7 @@ function countNeighbors(cellLocation, board, value) {
 }
 
 // Recursion opening
-function recursionOpening(row, col, value) {
+function recursionOpening(row, col) {
     var nextRow
     var nextCol
 

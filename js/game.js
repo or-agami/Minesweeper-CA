@@ -1,54 +1,13 @@
 'use strict'
 
-// localStorage.setItem('beginner', '');
-// localStorage.setItem('medium', '');
-// localStorage.setItem('expert', '');
-// var bestBeginnerScore
-// var bestMediumScore
-// var bestExpertScore
-// var localStorData = [
-//     { elBeginnerScore: document.getElementById('beginner-score'), beginnerScoreData: localStorage.getItem('beginner') },
-//     { elMediumScore: document.getElementById('medium-score'), mediumScoreData: localStorage.getItem('medium') },
-//     { elExpertScore: document.getElementById('expert-score'), expertScoreData: localStorage.getItem('expert') },
-// ]
-// var localStorData = {
-//     levelElement: {
-//         beginner: document.getElementById('beginner'),
-//         medium: document.getElementById('medium'),
-//         expert: document.getElementById('expert'),
-//     },
-//     getScore: {
-//         beginner: localStorage.getItem('beginner'),
-//         medium: localStorage.getItem('medium'),
-//         expert: localStorage.getItem('expert'),
-//     },
-// }
+
 var levelNames = ['beginner', 'medium', 'expert']
-// var localStorData = {
-//     beginner: {
-//         levelInnerText: document.getElementById('beginner').innerText,
-//         getScore: localStorage.getItem('beginner'),
-//         setScore: localStorage.setItem('beginner'),
-//     },
-//     medium: {
-//         levelInnerText: document.getElementById('medium').innerText,
-//         getScore: localStorage.getItem('medium'),
-//         setScore: localStorage.setItem('medium'),
-//     },
-//     expert: {
-//         levelInnerText: getElementById('expert').innerText,
-//         getScore: localStorage.getItem('expert'),
-//         setScore: localStorage.setItem('expert'),
-//     },
-// }
-
-
 
 const LIFE = '❤️'
 const HINT = '❔'
 const SPOILER = '💡'
 
-var gBoard, gGame
+var gBoard, gGame, boardsSaver
 var gLevel = {
     levelName: '',
     size: 0,
@@ -105,6 +64,7 @@ function initGame(size = 4, mines = 2, elSelectedLevel) {
     gLevel.levelName = (elSelectedLevel.innerText).toLowerCase()
     elSelectedLevel.style.backgroundColor = '#2F3E46'
     mineLocations = []
+    boardsSaver = []
     gGame = {
         isRunning: false, isOver: false, inSpoilMod: false, clearedCount: 0, flagsCount: 0, livesCount: 3,
     }
@@ -114,6 +74,8 @@ function initGame(size = 4, mines = 2, elSelectedLevel) {
 
     // Init board model
     gBoard = createBoard(size)
+    // boardsSaver.push(copyMat(gBoard))
+    boardsSaver.push(structuredClone(gBoard))
 
     // Init DOM board
     renderBoard(gBoard, '.board')
