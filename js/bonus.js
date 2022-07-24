@@ -32,11 +32,7 @@ function safeClick(elHintsCount) {
     gCheats.hints--
 
     // Update DOM hints count
-    let currHints = ''
-    for (let i = 0; i < gCheats.hints; i++) {
-        currHints += HINT
-    }
-    elHintsCount.innerText = currHints
+    elHintsCount.innerText = HINT.repeat(gCheats.hints)
 }
 
 // Player clicked on spoiler (flash 9 cells for a sec around clicked cell)
@@ -97,11 +93,7 @@ function spoilCells(location) {
     // Update DOM spoil count and turn off spoil mode
     if (gGame.inSpoilMod) {
         gGame.inSpoilMod = false
-        let currSpoilers = ''
-        for (let i = 0; i < gCheats.spoilers; i++) {
-            currSpoilers += SPOILER
-        }
-        elSpoilsCount.innerText = currSpoilers
+        elSpoilsCount.innerText = SPOILER.repeat(gCheats.spoilers)
     }
 }
 

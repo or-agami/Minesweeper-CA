@@ -149,10 +149,7 @@ function checkGameOver(clickedOnMine = false) {
     if (clickedOnMine) {
         gGame.livesCount--
         let currLives = ''
-        for (let i = 0; i < gGame.livesCount; i++) {
-            currLives += LIFE
-        }
-        elLivesCount.innerText = currLives
+        elLivesCount.innerText = LIFE.repeat(gGame.livesCount)
 
         // If player ran out of lives, reveal the mines (game over)
         if (gGame.livesCount < 1) revealMines()
@@ -189,14 +186,6 @@ function endGame(playerWon) {
     } else {
         elEmoji.innerText = '🤯'
     }
-
-    // Update best score
-    // const elBeginnerScore = document.getElementById('beginner-score')
-    // const elMediumScore = document.getElementById('medium-score')
-    // const elExpertScore = document.getElementById('expert-score')
-    // elBeginnerScore.innerText = localStorage.getItem('beginner')
-    // elMediumScore.innerText = localStorage.getItem('medium')
-    // elExpertScore.innerText = localStorage.getItem('expert')
 }
 
 // Update best score
