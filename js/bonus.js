@@ -114,5 +114,6 @@ function undoStep() {
     // Return alert if pleyer is in the first step
     if (boardsSaver.length === 0) return alert('You have got to the first step')
 
-    renderBoard(boardsSaver.pop())
+    gBoard = boardsSaver.pop()
+    renderBoard(gBoard)
 }
